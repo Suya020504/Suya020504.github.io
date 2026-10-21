@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://suya0504.vercel.app/sitemap.xml
