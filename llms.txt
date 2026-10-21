@@ -2,9 +2,9 @@
 
 > 데이터로 이유를 찾고, AI로 쓰임을 만듭니다.
 
-수학과 식품자원경제학을 바탕으로 관광·안전·복지 분야의 데이터를 분석합니다. 분석 결과를 해석하고, 사용자의 다음 행동을 돕는 서비스 흐름을 설계합니다. 프로젝트에 따라 팀장·PM·분석을 맡아 왔습니다.
+수학·식품자원경제학을 바탕으로 관광·안전·복지 데이터를 분석합니다. 분석 결과를 해석해 사용자의 다음 행동을 돕는 서비스 흐름을 설계합니다. 프로젝트에 따라 팀장·PM·분석을 맡았습니다.
 
-I analyze data on tourism, safety, and welfare, drawing on mathematics and food and resource economics. I interpret findings and design service flows that help users take their next step. My roles have included team lead, PM, and analyst, depending on the project.
+I analyze tourism, safety, and welfare data, grounded in mathematics and food & resource economics. I interpret the results and design service flows that help users take their next step. Depending on the project, I have worked as team lead, PM, or analyst.
 
 - 사이트: https://suya0504.vercel.app/
 - 이메일: shuai020504@naver.com
@@ -31,7 +31,7 @@ I analyze data on tourism, safety, and welfare, drawing on mathematics and food 
 - [바람의 지도](https://suya0504.vercel.app/projects/wind-map/): 바깥놀이 전 대기질 확인 시점과 담당자 승인 절차 설계 (수상: 충북인공지능산업협회장상)
 - [Startup Fit AI](https://suya0504.vercel.app/projects/startup-fit-ai/): 창업 준비 상태와 보완 과제를 살펴보는 진단 서비스 설계
 - [달서 미리온(ON)](https://suya0504.vercel.app/projects/mirion/): 지역 집계와 개인 상담을 분리하고 AI 해석을 규칙으로 다시 확인하는 공공서비스 설계 (수상: 입선 · 달서구청장상)
-- [닿지 않는 돌봄](https://suya0504.vercel.app/projects/goyang-care/): 돌봄이 필요한 주민이 서비스까지 실제로 닿을 수 있는지, 이동 병목을 진단
+- [닿지 않는 돌봄](https://suya0504.vercel.app/projects/goyang-care/): 돌봄이 필요한 주민의 서비스 접근성과 이동 병목 진단
 - [산촌 순환지수(FCI)](https://suya0504.vercel.app/projects/fci-ieumsup/): 산촌의 방문·공급 지표로 지역별 정책 과제를 제안한 시범 분석 (수상: 장려상 · 한국임업진흥원장상)
 - [말잇다 · VOICE MATE](https://suya0504.vercel.app/projects/malitda/): 학생이 음성인식 문장을 직접 확인·수정·승인한 뒤 공유하는 앱
 - [NO LOGO REMIX](https://suya0504.vercel.app/projects/no-logo-remix/): 브랜드는 숨기고 기술을 발견하게 하는 참여형 전시 팝업
@@ -51,14 +51,14 @@ I analyze data on tourism, safety, and welfare, drawing on mathematics and food 
 - 2026.05.29 우수상 · 단국대학교 총장상 · 같은 이름, 다른 기억 · 인문학, AI를 만나 지도를 그리다 (단국대학교 HUSS 사업단) — 근거: https://webzine.dankook.ac.kr/news/articleView.html?idxno=1107
 
 ## 진행 중인 대회
-- 말잇다 · VOICE MATE: 본선 진출 · 최종 결과 대기
-- 제21회 공중화장실 혁신아이디어 공모전: 최우수상 · 행정안전부장관상 수상 통보 · 시상 전
+- 말잇다 · VOICE MATE: 본선 진출
+- 제21회 공중화장실 혁신아이디어 공모전: 최우수상 · 행정안전부장관상 · 시상 전
 - 2026 식품 데이터 캡스톤디자인 경진대회: 본선 진출 (10팀)
 - 제3회 미래융합인재 발굴 소프트웨어 챌린지: 본선 진출
 - 2026 AI·디지털 기반 사회문제 해결 챌린지: 서류심사 합격 · 멘토링 단계
 - SK하이닉스 AI 해커톤 2026: 서류 전형 합격
-- 179 수요지도: 본선 발표 완료 · 본선 5팀 전원 시상 대상
-- 필지 블랙박스: 최종심사 진출 (4팀) · 최종심사 2026.10.30 예정
+- 179 수요지도: 본선 발표 완료 · 5팀 전원 시상 대상
+- 필지 블랙박스: 최종심사 진출 (4팀) · 최종심사 2026.10.30
 
 ## 발표
 - 2026.11.10 말잇다 · VOICE MATE 최종심사 (예정) · 2026 장애인 분야 해커톤 디지털 포용 분야 (공개 심사) · 역할: 팀 VOICE MATE · 중간심사 발표·기획 참여

@@ -226,6 +226,14 @@
     revealEls.forEach(function (el) { rio.observe(el); });
   }
 
+  /* ---------- hero: pause the endless light drift + glass float while the hero is off-screen ---------- */
+  var hero = doc.querySelector('.hero');
+  if (hero && !reduceMotion && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      hero.classList.toggle('is-offscreen', !entries[entries.length - 1].isIntersecting);
+    }).observe(hero);
+  }
+
   /* ---------- slide figure zoom via <dialog> (links still open the image without JS) ---------- */
   var dlg = doc.querySelector('[data-zoom-dialog]');
   if (dlg && typeof dlg.showModal === 'function') {

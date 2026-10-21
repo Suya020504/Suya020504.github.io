@@ -21,6 +21,13 @@
   --pane-glare: rgba(255,255,255,.62);
   --glass: rgba(255,255,255,.74); --glass-border: rgba(255,255,255,.92);
   --floor: rgba(29,111,150,.16);
+  /* hero background (v2.5): aurora light pools + a sky/mint wash over the whole hero, graph-paper dots edge to edge,
+     density contours + scatter, and a soft "paper" clearing that follows the copy block (decoration only) */
+  --aurora-sky: rgba(106,186,226,.55); --aurora-aqua: rgba(150,216,238,.62); --aurora-mint: rgba(118,210,180,.46);
+  --wash-sky: rgba(160,212,236,.55); --wash-mint: rgba(160,222,200,.5); --wash-mid: rgba(186,224,242,.5);
+  --paper: rgba(245,250,252,.9); --grid-dot: rgba(29,111,150,.17);
+  --iso-sky: #1D6F96; --iso-mint: #1A7A60; --iso-a: .2; --iso-step: .036; --axis: rgba(29,111,150,.34);
+  --dot-sky: rgba(70,160,205,.62); --dot-mint: rgba(80,186,152,.66); --pick: rgba(29,111,150,.5); --pick-dot: #1D6F96;
   --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
   --emoji-font: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", sans-serif;
   --ease: cubic-bezier(.2,.7,.2,1);
@@ -42,6 +49,11 @@
     --pane-edge: rgba(143,208,238,.30); --pane-rim: rgba(143,208,238,.22); --pane-line: rgba(143,208,238,.34); --pane-glare: rgba(143,208,238,.10);
     --glass: rgba(19,36,44,.78); --glass-border: rgba(143,208,238,.22);
     --floor: rgba(0,0,0,.45);
+    --aurora-sky: rgba(29,111,150,.36); --aurora-aqua: rgba(36,128,158,.24); --aurora-mint: rgba(26,122,96,.30);
+    --wash-sky: rgba(29,111,150,.26); --wash-mint: rgba(26,122,96,.24); --wash-mid: rgba(29,111,150,.16);
+    --paper: rgba(13,26,32,.82); --grid-dot: rgba(143,208,238,.12);
+    --iso-sky: #8FD0EE; --iso-mint: #8EE0C7; --iso-a: .13; --iso-step: .028; --axis: rgba(143,208,238,.3);
+    --dot-sky: rgba(124,198,232,.5); --dot-mint: rgba(127,217,190,.5); --pick: rgba(143,208,238,.5); --pick-dot: #8FD0EE;
     color-scheme: dark;
   }
 }
@@ -57,6 +69,11 @@
   --pane-edge: rgba(143,208,238,.30); --pane-rim: rgba(143,208,238,.22); --pane-line: rgba(143,208,238,.34); --pane-glare: rgba(143,208,238,.10);
   --glass: rgba(19,36,44,.78); --glass-border: rgba(143,208,238,.22);
   --floor: rgba(0,0,0,.45);
+  --aurora-sky: rgba(29,111,150,.36); --aurora-aqua: rgba(36,128,158,.24); --aurora-mint: rgba(26,122,96,.30);
+  --wash-sky: rgba(29,111,150,.26); --wash-mint: rgba(26,122,96,.24); --wash-mid: rgba(29,111,150,.16);
+  --paper: rgba(13,26,32,.82); --grid-dot: rgba(143,208,238,.12);
+  --iso-sky: #8FD0EE; --iso-mint: #8EE0C7; --iso-a: .13; --iso-step: .028; --axis: rgba(143,208,238,.3);
+  --dot-sky: rgba(124,198,232,.5); --dot-mint: rgba(127,217,190,.5); --pick: rgba(143,208,238,.5); --pick-dot: #8FD0EE;
   color-scheme: dark;
 }
 
@@ -308,7 +325,48 @@ html:not(.js) .nav-list { flex-wrap: wrap; }
 .kicker-ko { letter-spacing: .02em; text-transform: none; }
 
 /* ---------- #about hero ---------- */
-.hero { padding-block: clamp(40px, 7vw, 96px) clamp(56px, 8vw, 104px); }
+/* Background (v2.4 → v2.5, "너무 밋밋해"): an analyst's chart under morning light, five layers, all decoration —
+   1 aurora + wash: sky / aqua / mint light pooled on the portrait side, and a sky→mint wash that reaches across the
+     whole hero (sky from the top-left corner, mint from the bottom-left, a broad sky haze in the middle) — v2.4 only
+     lit the portrait side, so the copy half stayed the old blank sheet with a visible seam down the middle
+   2 graph-paper dot grid edge to edge (lighter on the copy side), fading out at the bottom
+   3 .hero-plot (inline SVG from the generator): density contours + the scatter they summarise, peaking behind the
+     portrait and fading out before the text column
+   4 .hero-copy::before: a blurred --paper clearing that follows the copy block at every width, so the wash and dots
+     calm down under the text (measured: every hero line ≥ 5.2:1 light, ≥ 7.7:1 dark)
+   5 the glass panes, which float gently and blur the contours behind them */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden; overflow: clip;
+  padding-block: clamp(40px, 7vw, 96px) clamp(56px, 8vw, 104px);
+}
+.hero::before {
+  content: ""; position: absolute; inset: -14% -10% -4%; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(33% 46% at 80% 30%, var(--aurora-sky), transparent 72%),
+    radial-gradient(28% 40% at 95% 72%, var(--aurora-aqua), transparent 70%),
+    radial-gradient(34% 40% at 60% 86%, var(--aurora-mint), transparent 72%),
+    radial-gradient(40% 64% at 56% 44%, var(--wash-mid), transparent 78%),
+    radial-gradient(40% 60% at 2% 0%, var(--wash-sky), transparent 74%),
+    radial-gradient(44% 60% at 14% 104%, var(--wash-mint), transparent 74%);
+  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 97%);
+          mask-image: linear-gradient(180deg, #000 60%, transparent 97%);
+}
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1.6px);
+  background-size: 22px 22px; background-position: 11px 11px;
+  /* graph paper across the whole hero, half strength on the copy side, gone at the bottom edge */
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.55), #000 66%), linear-gradient(180deg, #000 72%, transparent 98%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(90deg, rgba(0,0,0,.55), #000 66%), linear-gradient(180deg, #000 72%, transparent 98%);
+          mask-composite: intersect;
+}
+.hero-copy { position: relative; z-index: 1; }
+/* the clearing: as wide as the text actually runs (.hero-desc caps at 36em of 17px ≈ 38.5em here), blurred so it has no edge */
+.hero-copy::before {
+  content: ""; position: absolute; z-index: -1; top: -24px; bottom: -24px; left: -40px; width: calc(min(100%, 38.5em) + 72px);
+  border-radius: 48px; background: var(--paper); filter: blur(28px); pointer-events: none;
+}
 .hero-grid {
   display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr);
   gap: clamp(32px, 5vw, 64px); align-items: center;
@@ -348,7 +406,9 @@ a.hero-badge.tone-top:hover, a.hero-badge.tone-sky:hover, a.hero-badge.tone-exce
   margin-top: 28px; font-size: clamp(1.25rem, 1.1rem + .6vw, 1.5rem); font-weight: 700;
   line-height: 1.45; letter-spacing: -0.02em; text-wrap: balance;
 }
-.hero-desc { margin-top: 10px; max-width: 36em; color: var(--muted); font-size: 1.0625rem; line-height: 1.8; text-wrap: pretty; }
+.hero-desc { margin-top: 10px; max-width: 36em; color: var(--muted); font-size: 1.0625rem; line-height: 1.75; text-wrap: pretty; }
+.hero-desc p { margin: 0; }
+.hero-desc p + p { margin-top: 6px; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 
 /* Signature: stacked glass panes behind the portrait (echo of the PDF cover) */
@@ -372,10 +432,38 @@ a.hero-badge.tone-top:hover, a.hero-badge.tone-sky:hover, a.hero-badge.tone-exce
 .pane-1 { bottom: 12%; right: 0; width: 36%; height: 80%; }
 .pane-2 { bottom: 12%; right: 24%; width: 30%; height: 64%; }
 .pane-3 { bottom: 12%; left: 2%; width: 26%; height: 46%; }
+/* the slabs' shared floor is the chart's x-axis: a hairline with ticks, so the rising glass reads as a bar chart */
+.axis {
+  z-index: -1;
+  position: absolute; left: -4%; right: -8%; bottom: 12%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--axis) 10%, var(--axis) 90%, transparent);
+}
+.axis::after {
+  content: ""; position: absolute; left: 10%; right: 10%; top: 1px; height: 6px;
+  background: repeating-linear-gradient(90deg, var(--axis) 0 1px, transparent 1px 32px);
+}
 .floor {
   position: absolute; left: 6%; right: -4%; bottom: 5%; height: 14%; z-index: -2;
   background: radial-gradient(closest-side, var(--floor), transparent); filter: blur(4px);
 }
+/* density plot: centred on the portrait (46% = portrait centre, it carries margin-right: 8%), scaled with the column,
+   masked to an ellipse and cut off on the left so no contour runs under the copy */
+.hero-plot {
+  position: absolute; z-index: -3; left: 46%; top: 50%; width: 283%; height: auto; max-width: none;
+  aspect-ratio: 1120 / 800; transform: translate(-50%, -50%); pointer-events: none; overflow: visible;
+  -webkit-mask-image: linear-gradient(90deg, transparent 30%, #000 47%), radial-gradient(closest-side, #000 48%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(90deg, transparent 30%, #000 47%), radial-gradient(closest-side, #000 48%, transparent 100%);
+          mask-composite: intersect;
+}
+.hero-plot .iso { fill: none; stroke-width: 1.15; stroke-linejoin: round; stroke-opacity: calc(var(--iso-a) + var(--k) * var(--iso-step)); }
+.hero-plot .iso-sky { stroke: var(--iso-sky); }
+.hero-plot .iso-mint { stroke: var(--iso-mint); }
+.hero-plot .dots { fill: none; stroke-width: 4.5; stroke-linecap: round; }
+.hero-plot .dots-sky { stroke: var(--dot-sky); }
+.hero-plot .dots-mint { stroke: var(--dot-mint); }
+.hero-plot .pick { fill: none; stroke: var(--pick); stroke-width: 1.3; stroke-dasharray: 3 2.5; }
+.hero-plot .dots-pick { stroke: var(--pick-dot); } /* the observation each ring marks (v2.4 rings circled nothing and read as dust) */
 .portrait {
   display: block; width: min(300px, 72%); aspect-ratio: 1; margin-right: 8%;
   border-radius: 50%; padding: 6px; background: linear-gradient(140deg, var(--surface), var(--sky-soft));
@@ -389,6 +477,29 @@ a.hero-badge.tone-top:hover, a.hero-badge.tone-sky:hover, a.hero-badge.tone-exce
   .hero-grid { grid-template-columns: 1fr; gap: 8px; }
   .hero-visual { order: -1; min-height: 270px; width: 100%; max-width: 440px; justify-self: center; }
   .portrait { width: 200px; margin-right: 0; }
+  /* portrait on top, copy underneath: light and dots pool around the portrait, the plot fades out downward;
+     a faint sky / mint wash keeps the copy half tinted, the --paper clearing calms it under the text */
+  .hero::before {
+    background:
+      radial-gradient(44% 24% at 74% 14%, var(--aurora-sky), transparent 72%),
+      radial-gradient(40% 20% at 16% 22%, var(--aurora-mint), transparent 72%),
+      radial-gradient(36% 20% at 96% 36%, var(--aurora-aqua), transparent 70%),
+      radial-gradient(60% 26% at 0% 62%, var(--wash-sky), transparent 74%),
+      radial-gradient(60% 26% at 100% 88%, var(--wash-mint), transparent 74%);
+  }
+  .hero-copy::before { left: -24px; width: calc(100% + 48px); filter: blur(24px); }
+  .hero::after {
+    -webkit-mask-image: radial-gradient(62% 16% at 50% 17%, #000 0%, rgba(0,0,0,.5) 50%, transparent 86%);
+            mask-image: radial-gradient(62% 16% at 50% 17%, #000 0%, rgba(0,0,0,.5) 50%, transparent 86%);
+  }
+  .hero-plot {
+    left: 50%; width: 190%;
+    -webkit-mask-image: linear-gradient(180deg, #000 38%, transparent 66%), radial-gradient(closest-side, #000 48%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 38%, transparent 66%), radial-gradient(closest-side, #000 48%, transparent 100%);
+  }
+  .hero-plot .iso { stroke-width: 1.7; }
+  .hero-plot .dots { stroke-width: 6; }
+  .hero-plot .pick { stroke-width: 1.8; }
 }
 @media (max-width: 480px) {
   .hero-visual { min-height: 236px; }
@@ -400,12 +511,23 @@ a.hero-badge.tone-top:hover, a.hero-badge.tone-sky:hover, a.hero-badge.tone-exce
   .hero .cta-row .btn-ghost { flex: 1 1 0; min-width: 0; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .pane { animation: pane-in .9s var(--ease) both; }
-  .pane-2 { animation-delay: .08s; }
-  .pane-3 { animation-delay: .16s; }
+  /* one load sequence: contours draw outward from the portrait while the panes rise, then the scatter settles;
+     afterwards only a slow drift of the light and a gentle float of the glass */
+  .hero-plot .iso { stroke-dasharray: 1; stroke-dashoffset: 1; animation: iso-draw 1.5s var(--ease) calc(.1s + var(--r) * 80ms) forwards; }
+  .hero-plot .scatter { animation: fade-in .8s var(--ease) .75s both; }
+  .hero::before { animation: aurora-drift 24s ease-in-out infinite alternate; }
+  .pane { animation: pane-in .9s var(--ease) both, pane-float 8s ease-in-out .9s infinite alternate; }
+  .pane-2 { animation-delay: .08s, 1.7s; animation-duration: .9s, 9.5s; }
+  .pane-3 { animation-delay: .16s, 2.4s; animation-duration: .9s, 7s; }
   .portrait { animation: fade-up .7s var(--ease) .18s both; }
+  /* main.js marks the hero once it is scrolled away: the endless drift/float stop costing frames off-screen */
+  .hero.is-offscreen::before, .hero.is-offscreen .pane { animation-play-state: paused; }
 }
 @keyframes pane-in { from { opacity: 0; transform: rotateY(-26deg) translateY(22px); } to { opacity: 1; transform: rotateY(-26deg); } }
+@keyframes pane-float { from { transform: rotateY(-26deg) translateY(0); } to { transform: rotateY(-26deg) translateY(-10px); } }
+@keyframes iso-draw { to { stroke-dashoffset: 0; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes aurora-drift { from { transform: none; } to { transform: translate3d(-2.5%, 1.5%, 0) scale(1.05); } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
 /* ---------- #portfolio: 2×2 numbered cards ---------- */
@@ -572,8 +694,12 @@ a.hero-badge.tone-top:hover, a.hero-badge.tone-sky:hover, a.hero-badge.tone-exce
   transition: transform .16s var(--ease), box-shadow .16s var(--ease), border-color .16s;
 }
 .post:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--sky); }
+/* tile for the kind of post (💡 회고 · 🛠️ 개발 · 🙋 Q&A · 🧭 멘토링 · 🎤 발표 …) + date, like the talk cards */
+.post-meta { display: flex; align-items: center; gap: 10px; }
 .post .date { font-size: .8125rem; font-weight: 600; color: var(--sky-ink); }
-.post h3 { margin-top: 6px; font-size: 1rem; line-height: 1.55; }
+.post h3 { margin-top: 12px; font-size: 1rem; line-height: 1.55; }
+.post:hover .e-tile { transform: rotate(-6deg) scale(1.06); }
+.post .e-tile { transition: transform .2s var(--ease); }
 .post h3 a { color: var(--text); text-decoration: none; }
 .post h3 a::after { content: ""; position: absolute; inset: 0; border-radius: 16px; }
 .post h3 a:focus-visible { outline: none; }
@@ -992,11 +1118,12 @@ dialog.zoom::backdrop { background: rgba(13,26,32,.72); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   .reveal-ready .reveal { opacity: 1; translate: none; }
-  .btn:hover, .pf-card:hover, .post:hover, .pager a:hover, a.hero-badge:hover, .principle:hover, .pf-card:hover .e-tile { transform: none; }
+  .btn:hover, .pf-card:hover, .post:hover, .pager a:hover, a.hero-badge:hover, .principle:hover, .pf-card:hover .e-tile, .post:hover .e-tile { transform: none; }
 }
 
 @media print {
-  .site-header, .to-top, .filters, .skip-link, .panes, .floor { display: none !important; }
+  .site-header, .to-top, .filters, .skip-link, .panes, .floor, .hero-plot { display: none !important; }
+  .hero::before, .hero::after, .hero-copy::before { display: none; }
   .reveal { opacity: 1 !important; translate: none !important; }
   body { background: #fff; }
   .section.alt { background: none; }
