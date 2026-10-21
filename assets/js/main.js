@@ -251,6 +251,13 @@
       img.src = a.getAttribute('href');
       img.alt = thumb ? thumb.alt : '';
       img.decoding = 'async';
+      // natural size (data-w / data-h): reserves the space before the file arrives and caps the zoom at 100%
+      var w = parseInt(a.getAttribute('data-w'), 10), h = parseInt(a.getAttribute('data-h'), 10);
+      if (w > 0 && h > 0) {
+        img.width = w; img.height = h;
+        img.style.setProperty('--zw', w + 'px');
+        img.style.setProperty('--zh', h + 'px');
+      }
       stage.textContent = '';
       stage.appendChild(img);
       if (cap) cap.textContent = a.getAttribute('data-caption') || '';
