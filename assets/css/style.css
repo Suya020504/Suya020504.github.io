@@ -763,6 +763,8 @@ a.hero-badge.tone-top:hover, a.hero-badge.tone-sky:hover, a.hero-badge.tone-exce
 .award-table tr:target td { background: var(--sky-soft); }
 .award-table .col-tier { width: 96px; }
 .award-table .award-name { font-weight: 650; }
+.award-status { display: block; margin-top: 5px; font-size: .75rem; font-weight: 650; color: var(--mint-ink); line-height: 1.55; }
+.award-tag .award-status { flex-basis: 100%; margin-top: 0; }
 .award-table .org { display: block; color: var(--muted); font-size: .875rem; }
 /* organizer homepage: muted, underline on hover only, so it is not mistaken for a result link */
 .award-table .org a { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); text-decoration: none; }
@@ -777,14 +779,19 @@ a.hero-badge.tone-top:hover, a.hero-badge.tone-sky:hover, a.hero-badge.tone-exce
 .award-table .col-evidence { width: 196px; }
 .ev .emoji { flex: none; margin-right: 0; }
 .award-lower { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; margin-top: 24px; align-items: start; }
+.pending-groups { display: grid; gap: 20px; min-width: 0; }
 .pending, .latest { padding: 22px 24px 10px; border-radius: 18px; border: 1px solid var(--border); background: var(--surface); }
 .pending { border-style: dashed; }
+.pending.is-confirmed { border-style: solid; border-top: 3px solid var(--mint); }
 .pending h3, .latest-head h3 { display: flex; align-items: center; gap: 8px; font-size: 1.0625rem; }
 .pending h3 .icon { color: var(--sky-ink); }
 .pending ul, .latest-list { list-style: none; margin-top: 10px; }
 .pending li, .latest-list li { padding: 12px 0; border-top: 1px solid var(--border); }
 .pending strong { display: block; font-weight: 650; line-height: 1.5; }
 .pending .status { display: block; margin-top: 2px; font-size: .8125rem; font-weight: 650; color: var(--sky-ink); line-height: 1.5; }
+.pending.is-confirmed .status { color: var(--mint-ink); }
+.pending-meta { margin-top: 3px; color: var(--muted); font-size: .75rem; line-height: 1.55; }
+.pending-evidence { margin-top: 5px; font-size: .8125rem; }
 .pending .note { margin-top: 4px; font-size: .8125rem; color: var(--muted); line-height: 1.6; }
 .latest-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .latest-date { font-size: .8125rem; color: var(--muted); }

@@ -10,7 +10,7 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - 이메일: shuai020504@naver.com
 - 학력: 단국대학교 · 수학과 · 식품자원경제학과 복수전공 · 2024 – 2027.02 (졸업 예정)
 - Education: Dankook University · B.S. candidate, Mathematics and Food & Resource Economics (double major) · expected graduation: February 2027
-- 최종 업데이트: 2026-10-27
+- 최종 업데이트: 2026-10-28
 
 ## 링크
 - [GitHub](https://github.com/Suya020504)
@@ -36,29 +36,31 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - [말잇다 · VOICE MATE](https://suya0504.vercel.app/projects/malitda/): 학생이 음성인식 문장을 직접 확인·수정·승인한 뒤 공유하는 앱
 - [NO LOGO REMIX](https://suya0504.vercel.app/projects/no-logo-remix/): 브랜드는 숨기고 기술을 발견하게 하는 참여형 전시 팝업
 
-## 수상 (12건)
+## 수상 (13건)
+- 2026.10.13 최우수상 · 행정안전부장관상 · 선택에서 필수로 · 제21회 공중화장실 혁신아이디어 공모전 (행정안전부 · 한국화장실협회) · 수상 확정 · 시상 대기 · 시상식 2026.11.18 — 근거: https://jeonju.go.kr/planweb/board/view.9is?boardUid=ff8080818990c349018b1dbaa78e4b41&contentUid=ff8080818990c349018b041a87373953&dataUid=9be517a89eb4c41201a08fa37446413d&page=4&tmpField14=
 - 2026.09.21 대상 · 서울관광재단 대표이사상 · 지금서울 · 2026 비짓서울 API 데이터·AI 활용 아이디어 공모전 (서울관광재단) — 근거: https://api.visitseoul.net/support/notice/view/7?lang=ko&pageNo=1
 - 2026.09.11 최우수상 · 소방청장상 · 사각119 · 제6회 소방안전 빅데이터 활용 및 아이디어 경진대회 (서비스개발 부문) (소방청) — 근거: https://bigdata-119.kr/bbs/view?bbsctt_id=580
 - 2026.09 최우수상 · 나란히 · 2026 서울어린이대공원 AI기반 서비스 아이디어 공모전 (서울시설공단) — 근거: https://www.childrenpark-contest.co.kr/view.asp?boardcode=notice&field=&go=&idx=16&keyword=&page=
-- 2026.09.07 심층제안 최우수상 · 축산물품질평가원장상 · 다봄 · 2026 축평원 서비스 MEET YOUR IDEA 공모전 (심층 제안 부문) (축산물품질평가원) — 근거: https://www.ekape.or.kr/board/view.do?boardInfoNo=0024&boardNo=956&menuId=menu149208
+- 2026.09.07 심층제안 최우수상 · 축산물품질평가원장상 · 다봄 · 2026 축평원 서비스 MEET YOUR IDEA 공모전 (심층 제안 부문) (축산물품질평가원) · 수상 확정 · 시상 대기 · 시상식 2026.10.28 — 근거: https://www.ekape.or.kr/board/view.do?boardInfoNo=0024&boardNo=956&menuId=menu149208
 - 2026.09.18 우수작 1위 · 매입임대주택 예측정비 플랫폼 · 2026년 공공데이터 활용 아이디어 공모 (대구도시개발공사) — 근거: https://www.dudc.or.kr/ko/page.do?appId=notice&board_idx=8998&cmd=2&mnu_uid=100&pageNo=1
 - 2026.09.17 우수상 · 한국문화관광연구원장상 · 사람은 오는데, 왜 머물지 않을까? · 2026 관광데이터 분석 포스터 공모전 (한국문화관광연구원) — 근거: https://know.tour.go.kr/customer/contestevent/detail19Re.do?seq=29714
-- 2026.09 우수상 · 부문 1 · 같은 장면, 다른 정보 · 개방형 XR 협업 플랫폼 서비스 아이디어 도출 경진대회 (한국과학기술정보연구원(KISTI)) — 근거: https://www.kisti.re.kr/notifications/post/notice/7052
+- 2026.09.30 우수상 · 한국과학기술정보연구원장상 · 같은 장면, 다른 정보 · 개방형 XR 협업 플랫폼 서비스 아이디어 도출 경진대회 (한국과학기술정보연구원(KISTI)) — 근거: https://www.kisti.re.kr/notifications/post/notice/7052
 - 2026.09.16 충북인공지능산업협회장상 · 바람의 지도 · 제13회 전국 ICT융합 공모전 (충북과학기술혁신원 · 충북인공지능산업협회) — 근거: https://www.ictfestival.or.kr/board/view/UZf80/36307
 - 2026.09.03 장려상 · 한국임업진흥원장상 · 산촌 순환지수(FCI) · 이음숲 · 2026 임업통계 활용 경진대회 (아이디어 부문) (산림청 · 한국임업진흥원) — 근거: https://www.kofpi.or.kr/notice/notice_01view.do?bb_seq=12522
 - 2026.08.27 입선 · 달서구청장상 · 달서 미리온(ON) · 2026 달서 전국 대학생 AI활용 아이디어 콘테스트 (대구광역시 달서구) — 근거: https://www.dalseo.daegu.kr/index.do?menu_id=00002729
 - 2026.07.24 우수상 · RAILIFT NEXT · 역사 내외 디지털 광고 사업화 및 성과 측정 아이디어 공모전 ((주)비전잇)
 - 2026.05.29 우수상 · 단국대학교 총장상 · 같은 이름, 다른 기억 · 인문학, AI를 만나 지도를 그리다 (단국대학교 HUSS 사업단) — 근거: https://webzine.dankook.ac.kr/news/articleView.html?idxno=1107
 
-## 진행 중인 대회
-- 말잇다 · VOICE MATE: 본선 진출
-- 제21회 공중화장실 혁신아이디어 공모전: 최우수상 · 행정안전부장관상 · 시상 전
-- 2026 식품 데이터 캡스톤디자인 경진대회: 본선 진출 (10팀)
-- 제3회 미래융합인재 발굴 소프트웨어 챌린지: 본선 진출
-- 2026 AI·디지털 기반 사회문제 해결 챌린지: 서류심사 합격 · 멘토링 단계
-- SK하이닉스 AI 해커톤 2026: 서류 전형 합격
-- 179 수요지도: 본선 발표 완료 · 5팀 전원 시상 대상
-- 필지 블랙박스: 최종심사 진출 (4팀) · 최종심사 2026.10.30
+## 수상 확정 · 상격 미정
+- 말잇다 · VOICE MATE: 수상 확정 · 최종 상격 미정
+- 온지붕: 수상 확정 · 최종 상격 미정
+- 179 수요지도: 수상 확정 · 최종 상격 미정
+- 필지 블랙박스: 수상 확정 · 세부 상격 미정 · 안양시장상
+
+## 심사·결과 대기
+- 다봄 팀 · 식품 데이터 캡스톤: 참가팀 선정 · 과제 수행 중
+- 2026 AI·디지털 기반 사회문제 해결 챌린지: 서류심사 합격 · 멘토링 진행 중
+- SK하이닉스 AI 해커톤 2026: 서류 전형 합격 · 대회 진행 중
 
 ## 발표
 - 2026.11.10 말잇다 · VOICE MATE 최종심사 (예정) · 2026 장애인 분야 해커톤 디지털 포용 분야 (공개 심사) · 역할: 팀 VOICE MATE · 중간심사 발표·기획 참여
