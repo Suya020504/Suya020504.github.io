@@ -10,7 +10,7 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - 이메일: shuai020504@naver.com
 - 학력: 단국대학교 · 수학과 · 식품자원경제학과 복수전공 · 2024 – 2027.02 (졸업 예정)
 - Education: Dankook University · B.S. candidate, Mathematics and Food & Resource Economics (double major) · expected graduation: February 2027
-- 최종 업데이트: 2026-10-28
+- 최종 업데이트: 2026-10-31
 
 ## 링크
 - [GitHub](https://github.com/Suya020504)
@@ -36,7 +36,8 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - [말잇다 · VOICE MATE](https://suya0504.vercel.app/projects/malitda/): 학생이 음성인식 문장을 직접 확인·수정·승인한 뒤 공유하는 앱
 - [NO LOGO REMIX](https://suya0504.vercel.app/projects/no-logo-remix/): 브랜드는 숨기고 기술을 발견하게 하는 참여형 전시 팝업
 
-## 수상 (13건)
+## 수상 (14건)
+- 2026.10.28 대상 · 과학기술정보통신부장관상 · 온지붕 · 제3회 미래융합인재 발굴 소프트웨어 챌린지 (일반부) (과학기술정보통신부 · 경산시 · 정보통신기획평가원 · 경산이노베이션아카데미) — 근거: https://www.etnews.com/20261029000100
 - 2026.10.13 최우수상 · 행정안전부장관상 · 선택에서 필수로 · 제21회 공중화장실 혁신아이디어 공모전 (행정안전부 · 한국화장실협회) · 수상 확정 · 시상 대기 · 시상식 2026.11.18 — 근거: https://jeonju.go.kr/planweb/board/view.9is?boardUid=ff8080818990c349018b1dbaa78e4b41&contentUid=ff8080818990c349018b041a87373953&dataUid=9be517a89eb4c41201a08fa37446413d&page=4&tmpField14=
 - 2026.09.21 대상 · 서울관광재단 대표이사상 · 지금서울 · 2026 비짓서울 API 데이터·AI 활용 아이디어 공모전 (서울관광재단) — 근거: https://api.visitseoul.net/support/notice/view/7?lang=ko&pageNo=1
 - 2026.09.11 최우수상 · 소방청장상 · 사각119 · 제6회 소방안전 빅데이터 활용 및 아이디어 경진대회 (서비스개발 부문) (소방청) — 근거: https://bigdata-119.kr/bbs/view?bbsctt_id=580
@@ -53,7 +54,6 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 
 ## 수상 확정 · 상격 미정
 - 말잇다 · VOICE MATE: 수상 확정 · 최종 상격 미정
-- 온지붕: 수상 확정 · 최종 상격 미정
 - 179 수요지도: 수상 확정 · 최종 상격 미정
 - 필지 블랙박스: 수상 확정 · 세부 상격 미정 · 안양시장상
 
@@ -65,7 +65,7 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 ## 발표
 - 2026.11.10 말잇다 · VOICE MATE 최종심사 (예정) · 2026 장애인 분야 해커톤 디지털 포용 분야 (공개 심사) · 역할: 팀 VOICE MATE · 중간심사 발표·기획 참여
 - 2026.10.30 필지 블랙박스 최종심사 (예정) · 2026 안양시 공공데이터·AI 활용 대학생 경진대회 · 역할: 팀 도달 · 최종 발표자료·시연 영상 제작
-- 2026.10.28 「온지붕」 본선 발표 (예정) · 제3회 미래융합인재 발굴 소프트웨어 챌린지 (대구) · 역할: 3인 팀 참가
+- 2026.10.28 「온지붕」 본선 발표 · 제3회 미래융합인재 발굴 소프트웨어 챌린지 (대구) · 역할: 3인 팀 참가
 - 2026.10.16 179 수요지도 본선 발표 · AI기반 지속 가능한 통일 아이디어 공모전 · 고려대학교 세종캠퍼스 통일교육선도대학 사업단 · 역할: 팀 도달 · 본선 발표자료 제작·질의응답
 - 2026.09.17 사람은 오는데, 왜 머물지 않을까? 본선 포스터 발표 · 2026 관광데이터 분석 포스터 공모전 · 한국문화관광연구원 · 역할: 팀장 · 현장 포스터 설명(약 2시간)
 - 2026.09.09 나란히 본선 발표 · 2026 서울어린이대공원 AI기반 서비스 아이디어 공모전 · 서울시설공단 · 역할: 팀장 · 본선 발표 조율·대본 수정·질의응답 정리
@@ -76,6 +76,7 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - 2026.05.29 같은 이름, 다른 기억 최종 발표회 · 인문학, AI를 만나 지도를 그리다 · 단국대학교 HUSS 사업단 · 역할: 개인 프로젝트 · 발표
 
 ## 보도
+- 2026.10.29 전자신문 — [경산이노베이션아카데미 'AI로 일상의 문제를 해결하다'… 전국 163개 팀 SW 챌린지 도전](https://www.etnews.com/20261029000100)
 - 2026.10.01 베리타스알파 — [관광데이터 분석 포스터 공모전 우수상](https://www.veritas-a.com/news/articleView.html?idxno=630262)
 - 2026.09.30 DKU WEBZINE (단국대학교) — [단국대 이연수 학생(수학과), ‘제6회 소방안전 빅데이터 경진대회’ 소방청장상 수상](https://webzine.dankook.ac.kr/news/articleView.html?idxno=1368)
 - 2026.09.28 DKU Today (단국대학교 공식 홈페이지) — [이연수 학생(수학과), ‘제6회 소방안전 빅데이터 경진대회’ 소방청장상 수상](https://www.dankook.ac.kr/web/kor/dku-today?_dku_bbs_web_BbsPortlet_action=view_message&_dku_bbs_web_BbsPortlet_bbsMessageId=184931&p_p_id=dku_bbs_web_BbsPortlet&p_p_lifecycle=0&p_p_mode=view&p_p_state=normal)
