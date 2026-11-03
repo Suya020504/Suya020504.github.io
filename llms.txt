@@ -10,7 +10,7 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - 이메일: shuai020504@naver.com
 - 학력: 단국대학교 · 수학과 · 식품자원경제학과 복수전공 · 2024 – 2027.02 (졸업 예정)
 - Education: Dankook University · B.S. candidate, Mathematics and Food & Resource Economics (double major) · expected graduation: February 2027
-- 최종 업데이트: 2026-11-01
+- 최종 업데이트: 2026-11-03
 
 ## 링크
 - [GitHub](https://github.com/Suya020504)
@@ -31,15 +31,19 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - [바람의 지도](https://suya0504.vercel.app/projects/wind-map/): 바깥놀이 전 대기질 확인 시점과 담당자 승인 절차 설계 (수상: 충북인공지능산업협회장상)
 - [Startup Fit AI](https://suya0504.vercel.app/projects/startup-fit-ai/): 창업 준비 상태와 보완 과제를 살펴보는 진단 서비스 설계
 - [달서 미리온(ON)](https://suya0504.vercel.app/projects/mirion/): 지역 집계와 개인 상담을 분리하고 AI 해석을 규칙으로 다시 확인하는 공공서비스 설계 (수상: 입선 · 달서구청장상)
+- [필지 블랙박스](https://suya0504.vercel.app/projects/pilji-blackbox/): 위반건축물 현장조사 순서를 정하고 처분 공문 초안까지 만드는 안양시 담당자용 웹 서비스 (수상: 최우수상 · 안양시장상)
+- [179 수요지도](https://suya0504.vercel.app/projects/demand-map-179/): 북한 시·군 179곳의 필요를 계산하고, 북측 발표와 겹치는 곳에 협력 사업 초안을 만드는 지도 (수상: 우수상)
 - [닿지 않는 돌봄](https://suya0504.vercel.app/projects/goyang-care/): 돌봄이 필요한 주민의 서비스 접근성과 이동 병목 진단
 - [산촌 순환지수(FCI)](https://suya0504.vercel.app/projects/fci-ieumsup/): 산촌의 방문·공급 지표로 지역별 정책 과제를 제안한 시범 분석 (수상: 장려상 · 한국임업진흥원장상)
 - [말잇다 · VOICE MATE](https://suya0504.vercel.app/projects/malitda/): 학생이 음성인식 문장을 직접 확인·수정·승인한 뒤 공유하는 앱
 - [NO LOGO REMIX](https://suya0504.vercel.app/projects/no-logo-remix/): 브랜드는 숨기고 기술을 발견하게 하는 참여형 전시 팝업
 
-## 수상 (15건)
+## 수상 (17건)
 - 2026.10.28 대상 · 과학기술정보통신부장관상 · 온지붕 · 제3회 미래융합인재 발굴 소프트웨어 챌린지 (일반부) (과학기술정보통신부 · 경산시 · 정보통신기획평가원 · 경산이노베이션아카데미) — 근거: https://www.etnews.com/20261029000100
+- 2026.10.30 최우수상 · 안양시장상 · 필지 블랙박스 · 2026 안양시 공공데이터·AI 활용 대학생 경진대회 (안양시) — 근거: https://anyang.go.kr/main/selectBbsNttView.do?bbsNo=62&key=259&nttNo=460365
 - 2026.10.21 우수상 · 국민체육진흥공단 이사장상 · 먼저봄 · 2026년 국민체육진흥공단 공공데이터 활용 경진대회 (서비스 부문) (국민체육진흥공단) — 근거: https://www.kspo.or.kr/kspo/bbs/B0000099/view.do?menuNo=200435&nttId=64368
 - 2026.10.13 최우수상 · 행정안전부장관상 · 선택에서 필수로 · 제21회 공중화장실 혁신아이디어 공모전 (행정안전부 · 한국화장실협회) · 수상 확정 · 시상 대기 · 시상식 2026.11.18 — 근거: https://jeonju.go.kr/planweb/board/view.9is?boardUid=ff8080818990c349018b1dbaa78e4b41&contentUid=ff8080818990c349018b041a87373953&dataUid=9be517a89eb4c41201a08fa37446413d&page=4&tmpField14=
+- 2026.10.16 우수상 · 179 수요지도 · AI기반 지속 가능한 통일 아이디어 공모전 (고려대학교 세종캠퍼스 통일교육선도대학 사업단)
 - 2026.09.21 대상 · 서울관광재단 대표이사상 · 지금서울 · 2026 비짓서울 API 데이터·AI 활용 아이디어 공모전 (서울관광재단) — 근거: https://api.visitseoul.net/support/notice/view/7?lang=ko&pageNo=1
 - 2026.09.11 최우수상 · 소방청장상 · 사각119 · 제6회 소방안전 빅데이터 활용 및 아이디어 경진대회 (서비스개발 부문) (소방청) — 근거: https://bigdata-119.kr/bbs/view?bbsctt_id=580
 - 2026.09 최우수상 · 나란히 · 2026 서울어린이대공원 AI기반 서비스 아이디어 공모전 (서울시설공단) — 근거: https://www.childrenpark-contest.co.kr/view.asp?boardcode=notice&field=&go=&idx=16&keyword=&page=
@@ -55,8 +59,6 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 
 ## 수상 확정 · 상격 확인 중
 - 말잇다 · VOICE MATE: 수상 확정 · 최종 상격 미정
-- 179 수요지도: 수상 확정 · 상격 확인 중
-- 필지 블랙박스: 수상 확정 · 상격 확인 중 · 안양시장상
 
 ## 심사·결과 대기
 - 다봄 팀 · 식품 데이터 캡스톤: 참가팀 선정 · 과제 수행 중
@@ -66,7 +68,7 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 
 ## 발표
 - 2026.11.10 말잇다 · VOICE MATE 최종심사 (예정) · 2026 장애인 분야 해커톤 디지털 포용 분야 (공개 심사) · 역할: 팀 VOICE MATE · 중간심사 발표·기획 참여
-- 2026.10.30 필지 블랙박스 최종심사 일정 · 2026 안양시 공공데이터·AI 활용 대학생 경진대회 · 역할: 팀 도달 · 최종 발표자료·시연 영상 제작
+- 2026.10.30 필지 블랙박스 최종심사 발표 · 2026 안양시 공공데이터·AI 활용 대학생 경진대회 · 역할: 팀 도달 · 최종 발표자료·시연 영상 제작
 - 2026.10.28 「온지붕」 본선 발표 · 제3회 미래융합인재 발굴 소프트웨어 챌린지 (대구) · 역할: 3인 팀 참가
 - 2026.10.16 179 수요지도 본선 발표 · AI기반 지속 가능한 통일 아이디어 공모전 · 고려대학교 세종캠퍼스 통일교육선도대학 사업단 · 역할: 팀 도달 · 본선 발표자료 제작·질의응답
 - 2026.09.17 사람은 오는데, 왜 머물지 않을까? 본선 포스터 발표 · 2026 관광데이터 분석 포스터 공모전 · 한국문화관광연구원 · 역할: 팀장 · 현장 포스터 설명(약 2시간)
