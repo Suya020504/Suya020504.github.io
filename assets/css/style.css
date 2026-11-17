@@ -6,6 +6,7 @@
    experience timeline, alternating section bands. */
 
 :root {
+  --star: 29,111,150; --star-2: 26,122,96;
   --bg: #F5FAFC; --surface: #FFFFFF; --surface-2: #EAF5F9; --border: #D5E7EE; --text: #13303B; --muted: #4C6672;
   --sky: #5DB3D9; --sky-ink: #1D6F96; --mint: #6CCBAE; --mint-ink: #1A7A60; --sky-soft: #E1F1F9; --mint-soft: #E0F5EE; --on-accent: #FFFFFF;
   --band: #EDF6F9; --index-ink: #CBE2EB;
@@ -63,7 +64,7 @@
     --halo: rgba(52,140,182,.34); --halo-mint: rgba(40,140,112,.16);
     --pane-top: rgba(143,208,238,.46); --pane-sheen: rgba(143,208,238,.09);
     --etch: rgba(143,208,238,.15); --etch-strong: rgba(143,208,238,.3);
-    --glass: rgba(19,36,44,.78); --glass-border: rgba(143,208,238,.22); --shader-1: #0D1A20; --shader-2: #133A4C; --shader-3: #113A31; --shader-4: #172F3B; --tile-hi: rgba(255,255,255,.10); --tile-drop: rgba(0,0,0,.45); --chat-me: #2B7FA6; --dots-base: #24414C; --dots-hot: 143,208,238;
+    --glass: rgba(19,36,44,.78); --glass-border: rgba(143,208,238,.22); --star: 143,208,238; --star-2: 142,224,199; --shader-1: #0D1A20; --shader-2: #133A4C; --shader-3: #113A31; --shader-4: #172F3B; --tile-hi: rgba(255,255,255,.10); --tile-drop: rgba(0,0,0,.45); --chat-me: #2B7FA6; --dots-base: #24414C; --dots-hot: 143,208,238;
     --floor: rgba(0,0,0,.45);
     --shot-rim: rgba(143,208,238,.16); --shot-shadow: rgba(0,0,0,.62);
     --aurora-sky: rgba(29,111,150,.36); --aurora-aqua: rgba(36,128,158,.24); --aurora-mint: rgba(26,122,96,.30);
@@ -88,7 +89,7 @@
   --halo: rgba(52,140,182,.34); --halo-mint: rgba(40,140,112,.16);
   --pane-top: rgba(143,208,238,.46); --pane-sheen: rgba(143,208,238,.09);
   --etch: rgba(143,208,238,.15); --etch-strong: rgba(143,208,238,.3);
-  --glass: rgba(19,36,44,.78); --glass-border: rgba(143,208,238,.22); --shader-1: #0D1A20; --shader-2: #133A4C; --shader-3: #113A31; --shader-4: #172F3B; --tile-hi: rgba(255,255,255,.10); --tile-drop: rgba(0,0,0,.45); --chat-me: #2B7FA6; --dots-base: #24414C; --dots-hot: 143,208,238;
+  --glass: rgba(19,36,44,.78); --glass-border: rgba(143,208,238,.22); --star: 143,208,238; --star-2: 142,224,199; --shader-1: #0D1A20; --shader-2: #133A4C; --shader-3: #113A31; --shader-4: #172F3B; --tile-hi: rgba(255,255,255,.10); --tile-drop: rgba(0,0,0,.45); --chat-me: #2B7FA6; --dots-base: #24414C; --dots-hot: 143,208,238;
   --floor: rgba(0,0,0,.45);
   --shot-rim: rgba(143,208,238,.16); --shot-shadow: rgba(0,0,0,.62);
   --aurora-sky: rgba(29,111,150,.36); --aurora-aqua: rgba(36,128,158,.24); --aurora-mint: rgba(26,122,96,.30);
@@ -1544,15 +1545,24 @@ dialog.zoom::backdrop { background: rgba(13,26,32,.72); }
 #projects .filter-sep { display: none; }
 #projects .award-toggle { margin: 0 0 8px auto; }
 
-/* ================================================================ v3.2: generated moving background (light theme only) */
-.hero-video { position: absolute; inset: 0; z-index: -2; pointer-events: none; opacity: 0; transition: opacity 1.4s var(--ease);
-  -webkit-mask-image: linear-gradient(180deg, #000 64%, transparent 98%); mask-image: linear-gradient(180deg, #000 64%, transparent 98%); }
-.hero-video.is-live { opacity: 1; }
-.hero-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
-.hero-video video.is-prev { opacity: 1; z-index: 1; }
-.hero-video video.is-on { opacity: 1; z-index: 2; transition: opacity 1.6s linear; }
-.hero-video::after { content: ""; position: absolute; inset: 0; z-index: 3; background: linear-gradient(90deg, var(--paper), transparent 62%); }
-.hero:has(.hero-video.is-live)::before { opacity: .25; }
-:root[data-theme="dark"] .hero-video { display: none; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero-video { display: none; } }
-@media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
+/* ================================================================ v3.3: constellation background (replaces the v3.2 video)
+   Small stars joined into constellations by hairlines, twinkling slowly; stronger on the portrait side,
+   faint behind the copy. The nearest figure brightens a little under the pointer. */
+.hero-stars { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; display: block; pointer-events: none; opacity: 0; transition: opacity 1.6s var(--ease);
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.3), #000 58%), linear-gradient(180deg, #000 70%, transparent 98%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(90deg, rgba(0,0,0,.3), #000 58%), linear-gradient(180deg, #000 70%, transparent 98%);
+          mask-composite: intersect; }
+.hero-stars.is-live { opacity: 1; }
+.hero.has-stars::after { display: none; }
+
+/* ================================================================ v3.3 mobile tightening */
+@media (max-width: 560px) {
+  .hero-badges { gap: 6px; }
+  .hero-badge { min-height: 30px; padding: 0 10px; font-size: .75rem; gap: 4px; }
+  .pt-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-bottom: 12px; }
+  .pt-legend li { padding: 8px 10px; }
+  .pt-legend li > span:last-child { display: none; }
+  .pt-legend b { font-size: .875rem; }
+  #projects .award-toggle { margin: 6px 0 8px; }
+}

@@ -601,38 +601,89 @@
     (doc.fonts && doc.fonts.ready ? doc.fonts.ready : Promise.resolve()).then(build);
   });
 
-  /* ---------------------------------------------------------------- v3.2 hero video (light theme)
-     Two copies of the generated clip cross-fade near the end for a seamless loop. Not loaded in dark theme,
-     with data-saver or reduced motion: the WebGL gradient stays there. */
-  toArray(doc.querySelectorAll('[data-hero-video]')).forEach(function (wrap) {
-    var conn = navigator.connection || {};
-    if (reduceMotion || conn.saveData) return;
-    var vids = wrap.querySelectorAll('video');
-    if (vids.length < 2) return;
-    var a = vids[0], b = vids[1], FADE = 1.6, cur = a, swapping = false, visible = true, loaded = false;
-    function play(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-    function shown() { return getComputedStyle(wrap).display !== 'none'; }
-    function load() {
-      if (loaded || !shown()) return;
-      loaded = true;
-      [a, b].forEach(function (v) { v.muted = true; v.preload = 'auto'; v.src = wrap.getAttribute('data-src'); });
-      a.addEventListener('playing', function () { wrap.classList.add('is-live'); }, { once: true });
-      a.classList.add('is-on');
-      play(a);
+  /* ---------------------------------------------------------------- v3.3 constellation background
+     Stars are placed once (denser on the portrait side), each joined to its nearest neighbours within reach,
+     so small figures form. Stars twinkle slowly; the figure nearest the pointer brightens a little.
+     ~24fps, paused off screen; reduced motion draws one still frame. Colours come from --star / --star-2. */
+  toArray(doc.querySelectorAll('[data-stars]')).forEach(function (cv) {
+    var ctx3 = cv.getContext && cv.getContext('2d');
+    if (!ctx3) return;
+    var host = cv.parentElement, dpr = Math.min(2, window.devicePixelRatio || 1);
+    var W = 0, H = 0, stars = [], links = [], col = { a: '29,111,150', b: '26,122,96' };
+    var px = -9999, py = -9999, visible = true, last = 0, t0 = performance.now();
+    function readColours() {
+      var cs = getComputedStyle(root);
+      col.a = cs.getPropertyValue('--star').trim() || col.a;
+      col.b = cs.getPropertyValue('--star-2').trim() || col.b;
     }
-    function swap() {
-      var old = cur, next = cur === a ? b : a;
-      swapping = true; next.currentTime = 0; play(next);
-      old.classList.remove('is-on'); old.classList.add('is-prev'); next.classList.add('is-on'); cur = next;
-      setTimeout(function () { old.classList.remove('is-prev'); old.pause(); swapping = false; }, FADE * 1000 + 120);
+    function rand(seed) { var x = Math.sin(seed * 127.1) * 43758.5453; return x - Math.floor(x); }
+    function build() {
+      W = cv.clientWidth; H = cv.clientHeight;
+      if (!W || !H) return;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      var n = Math.round(Math.min(110, Math.max(36, (W * H) / 11000)));
+      stars = [];
+      for (var i = 0, k = 0; stars.length < n && k < n * 6; k++) {
+        var x = rand(k + 1.3) * W, y = rand(k + 7.9) * H;
+        // fewer stars behind the copy (left), more around the portrait (right)
+        if (rand(k + 3.7) > 0.25 + 0.75 * (x / W)) continue;
+        stars.push({ x: x, y: y, r: 0.6 + rand(k + 5.1) * 1.2, p: rand(k + 9.4) * 6.283, s: 0.4 + rand(k + 2.2) * 0.8, mint: rand(k + 4.4) > 0.65, g: -1 });
+        i++;
+      }
+      // join each star to its two nearest neighbours within reach; union-find gives each figure an id
+      var reach = Math.min(150, Math.max(90, W / 9)), parent = stars.map(function (_, i) { return i; });
+      function find(i) { while (parent[i] !== i) { parent[i] = parent[parent[i]]; i = parent[i]; } return i; }
+      links = []; var seen = {};
+      stars.forEach(function (a, i) {
+        var near = stars.map(function (b, j) { return { j: j, d: Math.hypot(a.x - b.x, a.y - b.y) }; })
+          .filter(function (o) { return o.j !== i && o.d < reach; }).sort(function (u, v) { return u.d - v.d; }).slice(0, 2);
+        near.forEach(function (o) {
+          var key = Math.min(i, o.j) + '-' + Math.max(i, o.j);
+          if (seen[key]) return;
+          seen[key] = 1; links.push({ a: i, b: o.j, d: o.d }); parent[find(i)] = find(o.j);
+        });
+      });
+      stars.forEach(function (s, i) { s.g = find(i); });
+      draw(performance.now(), true);
     }
-    [a, b].forEach(function (v) {
-      v.addEventListener('timeupdate', function () { if (v === cur && !swapping && v.duration && v.currentTime >= v.duration - FADE) swap(); });
-    });
-    function sync() { if (!loaded) return; if (visible && !doc.hidden && shown()) play(cur); else { a.pause(); b.pause(); } }
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; sync(); }).observe(wrap);
-    doc.addEventListener('visibilitychange', sync);
-    new MutationObserver(function () { load(); sync(); }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
-    load();
+    function draw(now, force) {
+      if (!force && (!visible || doc.hidden || now - last < 42)) return;
+      last = now;
+      var t = (now - t0) / 1000;
+      ctx3.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx3.clearRect(0, 0, W, H);
+      // the figure under the pointer
+      var hot = -1, hd = 110;
+      stars.forEach(function (s) { var d = Math.hypot(s.x - px, s.y - py); if (d < hd) { hd = d; hot = s.g; } });
+      var drift = reduceMotion ? 0 : 1;
+      function pos(s) { return [s.x + Math.sin(t * 0.05 + s.p) * 3 * drift, s.y + Math.cos(t * 0.04 + s.p) * 3 * drift]; }
+      ctx3.lineWidth = 0.7;
+      links.forEach(function (l) {
+        var A = stars[l.a], B = stars[l.b], pa = pos(A), pb = pos(B), on = A.g === hot;
+        var al = (on ? 0.32 : 0.11) * (1 - l.d / 170);
+        ctx3.strokeStyle = 'rgba(' + col.a + ',' + al.toFixed(3) + ')';
+        ctx3.beginPath(); ctx3.moveTo(pa[0], pa[1]); ctx3.lineTo(pb[0], pb[1]); ctx3.stroke();
+      });
+      stars.forEach(function (s) {
+        var p = pos(s), tw = reduceMotion ? 0.7 : 0.45 + 0.55 * (0.5 + 0.5 * Math.sin(t * s.s + s.p));
+        var on = s.g === hot, al = (on ? 0.85 : 0.42) * tw;
+        ctx3.fillStyle = 'rgba(' + (s.mint ? col.b : col.a) + ',' + al.toFixed(3) + ')';
+        ctx3.beginPath(); ctx3.arc(p[0], p[1], s.r * (on ? 1.25 : 1), 0, 6.2832); ctx3.fill();
+      });
+    }
+    function loop(now) { draw(now); if (!reduceMotion) window.requestAnimationFrame(loop); }
+    readColours();
+    new MutationObserver(function () { readColours(); draw(performance.now(), true); }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    var dm = mq('(prefers-color-scheme: dark)'); if (dm.addEventListener) dm.addEventListener('change', function () { readColours(); draw(performance.now(), true); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(cv);
+    if (host && mq('(hover: hover) and (pointer: fine)').matches) {
+      host.addEventListener('pointermove', function (e) { var r = cv.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top; });
+      host.addEventListener('pointerleave', function () { px = py = -9999; });
+    }
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 200); });
+    build();
+    cv.classList.add('is-live');
+    if (host) host.classList.add('has-stars');
+    if (!reduceMotion) window.requestAnimationFrame(loop);
   });
 })();
