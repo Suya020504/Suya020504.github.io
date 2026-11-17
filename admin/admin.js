@@ -651,26 +651,28 @@
     });
   }
 
+  // The owner's PC (build/auto_deploy.py, every 5 min) builds and publishes; the site's version.json then names the
+  // source commit it was built from. Done when that commit is ours or a later one.
   function watchDeploy(sha) {
-    var tries = 0;
-    setStatus('저장 완료 · 빌드를 기다리는 중…');
+    var tries = 0, started = Date.now();
+    setStatus('저장 완료 · PC가 빌드·배포하는 중… (보통 5–8분)');
+    function done(v) {
+      if (!v || !v.source) return Promise.resolve(false);
+      if (v.source === sha) return Promise.resolve(true);
+      return gh('/repos/' + REPO + '/compare/' + sha + '...' + v.source)
+        .then(function (c) { return c.status === 'ahead' || c.status === 'identical'; }).catch(function () { return false; });
+    }
     function tick() {
       tries++;
-      gh('/repos/' + REPO + '/actions/runs?head_sha=' + sha + '&per_page=5').then(function (r) {
-        var run = r && r.workflow_runs && r.workflow_runs[0];
-        if (!run) {
-          if (tries < 25) return void setTimeout(tick, 6000);
-          return setStatus('저장 완료 · 배포 기록을 찾지 못했어요 (GitHub Actions 확인)', 'https://github.com/' + REPO + '/actions', 'warn');
-        }
-        if (run.status !== 'completed') { setStatus('빌드·검사·배포 중… (보통 2–3분)', run.html_url); return void setTimeout(tick, 8000); }
-        if (run.conclusion === 'success') setStatus('배포 완료 · 1분 안에 사이트에 반영돼요 ↗', SITE, 'ok');
-        else setStatus('배포 실패 — 눌러서 원인 보기 (사이트는 이전 상태 그대로예요)', run.html_url, 'error');
-      }).catch(function (e) {
-        if (e.status === 403) setStatus('저장 완료 · 배포 상태는 GitHub Actions에서 확인하세요', 'https://github.com/' + REPO + '/actions', 'warn');
-        else if (tries < 40) setTimeout(tick, 10000);
-      });
+      fetch('../version.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; }).then(done).then(function (ok) {
+          if (ok) return setStatus('배포 완료 · 사이트에 반영됐어요 ↗', SITE, 'ok');
+          var min = Math.round((Date.now() - started) / 60000);
+          if (min < 20) { setStatus('저장 완료 · PC가 빌드·배포하는 중… (' + min + '분 경과, 보통 5–8분)'); return void setTimeout(tick, 15000); }
+          setStatus('저장은 됐지만 20분째 배포가 안 됐어요. PC가 꺼져 있거나 검사에서 막혔을 수 있어요.', null, 'warn');
+        });
     }
-    setTimeout(tick, 5000);
+    setTimeout(tick, 20000);
   }
 
   function logout() {

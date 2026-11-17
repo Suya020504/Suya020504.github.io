@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src https://api.github.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://api.github.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
 <meta name="referrer" content="no-referrer">
 <title>포트폴리오 관리자</title>
 <link rel="stylesheet" href="admin.css">
@@ -27,9 +27,9 @@
     <details class="help">
       <summary>토큰은 어떻게 만드나요?</summary>
       <ol>
-        <li>GitHub → Settings → Developer settings → Personal access tokens → <b>Fine-grained tokens</b> → Generate new token</li>
-        <li>Repository access: <b>Only select repositories</b> → <code>portfolio-site</code> (자동 배포용 비밀값으로도 쓰려면 <code>Suya020504.github.io</code>, <code>Suya020504</code>도 선택)</li>
-        <li>Permissions → Repository permissions: <b>Contents: Read and write</b>, <b>Actions: Read-only</b>(배포 상태 표시)</li>
+        <li>GitHub에 <b>Suya020504 계정으로 로그인한 브라우저</b>에서 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">새 토큰 만들기</a>를 여세요 (로그인 안 된 브라우저에서는 404가 떠요)</li>
+        <li>Repository access: <b>Only select repositories</b> → <code>portfolio-site</code> 하나만 선택</li>
+        <li>Permissions → Repository permissions → <b>Contents: Read and write</b> (다른 권한은 필요 없어요)</li>
         <li>만든 토큰을 위 칸에 붙여 넣으세요. 토큰은 이 브라우저에만 저장되고 다른 곳으로 보내지 않습니다(GitHub API만 사용).</li>
       </ol>
     </details>
