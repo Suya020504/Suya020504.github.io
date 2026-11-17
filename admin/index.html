@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src https://api.github.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+<meta name="referrer" content="no-referrer">
+<title>포트폴리오 관리자</title>
+<link rel="stylesheet" href="admin.css">
+<script src="schema.js" defer></script>
+<script src="admin.js" defer></script>
+</head>
+<body>
+<section id="login" class="login" aria-labelledby="login-title">
+  <div class="login-card">
+    <p class="kicker">Portfolio Admin</p>
+    <h1 id="login-title">포트폴리오 관리자</h1>
+    <p class="muted">GitHub 토큰으로 로그인하면 수상·프로젝트·보도·교육 항목을 직접 등록하고 고치고 지울 수 있어요. 저장하면 자동으로 빌드·검사·배포됩니다.</p>
+    <form id="login-form" autocomplete="off">
+      <label class="field"><span class="field-label">GitHub 토큰</span>
+        <input id="token" type="password" spellcheck="false" placeholder="github_pat_…" required></label>
+      <label class="check"><input id="remember" type="checkbox" checked> 이 브라우저에서 로그인 유지</label>
+      <button class="btn primary" type="submit">로그인</button>
+      <p id="login-error" class="error" role="alert" hidden></p>
+    </form>
+    <details class="help">
+      <summary>토큰은 어떻게 만드나요?</summary>
+      <ol>
+        <li>GitHub → Settings → Developer settings → Personal access tokens → <b>Fine-grained tokens</b> → Generate new token</li>
+        <li>Repository access: <b>Only select repositories</b> → <code>portfolio-site</code> (자동 배포용 비밀값으로도 쓰려면 <code>Suya020504.github.io</code>, <code>Suya020504</code>도 선택)</li>
+        <li>Permissions → Repository permissions: <b>Contents: Read and write</b>, <b>Actions: Read-only</b>(배포 상태 표시)</li>
+        <li>만든 토큰을 위 칸에 붙여 넣으세요. 토큰은 이 브라우저에만 저장되고 다른 곳으로 보내지 않습니다(GitHub API만 사용).</li>
+      </ol>
+    </details>
+  </div>
+</section>
+
+<div id="app" class="app" hidden>
+  <aside class="side" aria-label="컬렉션">
+    <div class="brand"><span class="logo">YS</span><span>관리자</span></div>
+    <nav id="nav" class="nav"></nav>
+    <div class="side-foot">
+      <a class="side-link" href="../" target="_blank" rel="noopener">사이트 열기 ↗</a>
+      <button id="logout" class="side-link" type="button">로그아웃</button>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="top">
+      <div class="top-title"><span id="col-icon" class="col-icon" aria-hidden="true"></span><h2 id="col-title">불러오는 중…</h2><span id="col-count" class="count"></span></div>
+      <div class="top-actions">
+        <input id="search" class="search" type="search" placeholder="검색" aria-label="항목 검색">
+        <button id="add" class="btn" type="button">＋ 새 항목</button>
+      </div>
+    </header>
+    <p id="col-help" class="col-help"></p>
+    <div id="list" class="list" role="list"></div>
+  </main>
+  <aside id="drawer" class="drawer" aria-labelledby="drawer-title" hidden>
+    <header class="drawer-head">
+      <h3 id="drawer-title">항목 편집</h3>
+      <div class="drawer-tools">
+        <button class="icon-btn" data-act="up" type="button" title="위로">↑</button>
+        <button class="icon-btn" data-act="down" type="button" title="아래로">↓</button>
+        <button class="icon-btn" data-act="dup" type="button" title="복제">⧉</button>
+        <button class="icon-btn danger" data-act="del" type="button" title="삭제">🗑</button>
+        <button class="icon-btn" data-act="close" type="button" title="닫기">✕</button>
+      </div>
+    </header>
+    <form id="form" class="form" autocomplete="off"></form>
+  </aside>
+  <footer class="savebar">
+    <span id="status" class="status" role="status"></span>
+    <span class="spacer"></span>
+    <button id="discard" class="btn ghost" type="button" disabled>변경 취소</button>
+    <button id="save" class="btn primary" type="button" disabled>저장하고 배포</button>
+  </footer>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
