@@ -375,4 +375,229 @@
       el.style.setProperty('--my', Math.round(e.clientY - r.top) + 'px');
     }, { passive: true });
   }
+
+  /* ---------------------------------------------------------------- v3 ask panel ("talking portfolio")
+     Answers come from the page's JSON (built from content.json). Typing effect; optional Korean speech. */
+  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+  var synth = window.speechSynthesis || null, koVoice = null, voiceOn = false;
+  function pickVoice() {
+    if (!synth) return;
+    koVoice = (synth.getVoices() || []).filter(function (v) { return /^ko([-_]|$)/i.test(v.lang); })[0] || null;
+    toArray(doc.querySelectorAll('[data-voice]')).forEach(function (b) { b.hidden = !koVoice; });
+  }
+  if (synth) { pickVoice(); if (synth.addEventListener) synth.addEventListener('voiceschanged', pickVoice); }
+  function speak(text) {
+    return new Promise(function (resolve) {
+      if (!voiceOn || !synth || !koVoice) return resolve();
+      var u = new SpeechSynthesisUtterance(text.replace(/[→·]/g, ' '));
+      u.voice = koVoice; u.lang = koVoice.lang;
+      var done = false, fin = function () { if (!done) { done = true; resolve(); } };
+      u.onend = fin; u.onerror = fin; setTimeout(fin, 1200 + text.length * 170);
+      synth.speak(u);
+    });
+  }
+  toArray(doc.querySelectorAll('[data-voice]')).forEach(function (b) {
+    b.addEventListener('click', function () {
+      voiceOn = !voiceOn;
+      toArray(doc.querySelectorAll('[data-voice]')).forEach(function (x) { x.setAttribute('aria-pressed', voiceOn ? 'true' : 'false'); });
+      if (!voiceOn && synth) synth.cancel();
+    });
+  });
+  toArray(doc.querySelectorAll('[data-talk]')).forEach(function (panel) {
+    var dataEl = panel.querySelector('[data-talk-data]');
+    if (!dataEl) return;
+    var data = JSON.parse(dataEl.textContent), cast = data.cast || {};
+    var log = panel.querySelector('[data-talk-log]'), chipsEl = panel.querySelector('[data-talk-chips]');
+    var status = panel.querySelector('[data-talk-status]'), idle = status ? status.getAttribute('data-idle') : '';
+    var speaker = panel.querySelector('[data-speaker]');
+    var busy = false, hurry = false, queued = null, started = false;
+    var pause = function (ms) { return hurry ? Promise.resolve() : wait(ms); };
+    function setSpeaking(on) {
+      if (speaker) speaker.classList.toggle('is-speaking', on);
+      panel.classList.toggle('is-busy', on);
+      if (status) status.textContent = on ? (cast.me && cast.me.name ? cast.me.name + ' 님이 답변하는 중' : '답변하는 중') : idle;
+    }
+    function scroll() { log.scrollTop = log.scrollHeight; }
+    async function say(line) {
+      var mine = line.who === 'visitor';
+      var row = doc.createElement('div');
+      row.className = 'msg' + (mine ? ' is-me' : '');
+      if (!mine) {
+        var av = doc.createElement('span'); av.className = 'msg-av';
+        var t = panel.querySelector('template[data-cast="me"]');
+        if (t) av.appendChild(t.content.cloneNode(true));
+        row.appendChild(av);
+      }
+      var bubble = doc.createElement('div'); bubble.className = 'msg-bubble';
+      if (!mine) { var nm = doc.createElement('span'); nm.className = 'msg-name'; nm.textContent = (cast.me && cast.me.name) || ''; bubble.appendChild(nm); }
+      var text = doc.createElement('span'); bubble.appendChild(text);
+      row.appendChild(bubble); log.appendChild(row); scroll();
+      if (mine || reduceMotion || hurry) {
+        text.textContent = line.text;
+        if (!mine && voiceOn && !hurry) { setSpeaking(true); await speak(line.text); setSpeaking(false); }
+      } else {
+        setSpeaking(true);
+        var dots = doc.createElement('span'); dots.className = 'typing'; dots.innerHTML = '<i></i><i></i><i></i>'; dots.setAttribute('aria-hidden', 'true');
+        text.appendChild(dots);
+        await pause(480);
+        text.textContent = ''; text.setAttribute('aria-hidden', 'true');
+        var spoken = speak(line.text), chs = Array.from(line.text), talking = voiceOn && koVoice;
+        var per = talking ? 58 : 18, step = !talking && chs.length > 36 ? 2 : 1;
+        for (var i = step; i <= chs.length + step - 1 && !hurry; i += step) {
+          text.textContent = chs.slice(0, i).join('');
+          if (i % 8 === 0) scroll();
+          await pause(per);
+        }
+        text.textContent = line.text; text.removeAttribute('aria-hidden');
+        await spoken; setSpeaking(false);
+      }
+      if (line.link) {
+        var a = doc.createElement('a'); a.className = 'msg-link'; a.href = line.link.href; a.textContent = line.link.label; bubble.appendChild(a);
+      }
+      scroll();
+      await pause(mine ? 200 : 280);
+    }
+    async function run(lines) {
+      busy = true;
+      for (var i = 0; i < lines.length; i++) await say(lines[i]);
+      busy = false; hurry = false; setSpeaking(false);
+      if (queued) { var next = queued; queued = null; run(next); }
+    }
+    function start() { if (!started) { started = true; run(data.intro || []); } }
+    (data.chips || []).forEach(function (c) {
+      var b = doc.createElement('button');
+      b.type = 'button'; b.className = 'chip'; b.textContent = c.q;
+      b.addEventListener('click', function () {
+        var ans = (c.a || []).slice();
+        if (c.link && ans.length) ans[ans.length - 1] = { who: ans[ans.length - 1].who, text: ans[ans.length - 1].text, link: c.link };
+        var lines = [{ who: 'visitor', text: c.q }].concat(ans);
+        start();
+        if (busy) { hurry = true; queued = lines; if (synth && voiceOn) synth.cancel(); return; }
+        run(lines);
+      });
+      chipsEl.appendChild(b);
+    });
+    log.setAttribute('aria-live', 'polite');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (en) {
+        if (en.some(function (x) { return x.isIntersecting; })) { setTimeout(start, reduceMotion ? 0 : 500); io.disconnect(); }
+      }, { threshold: 0.3 });
+      io.observe(panel);
+    } else start();
+  });
+
+  /* ---------------------------------------------------------------- v3 project cover-flow
+     Native scroll + snap; cards turn slightly away from the centre. Drag (mouse), swipe (touch), arrows/keys.
+     Advances every 5s while nobody interacts; stops off screen and under reduced motion. */
+  toArray(doc.querySelectorAll('[data-rail]')).forEach(function (railEl) {
+    var track = railEl.querySelector('.rail-track');
+    var items = toArray(track.children), count = railEl.querySelector('[data-rail-count]');
+    if (!items.length) return;
+    var cur = 0, raf = 0, busyR = false, visible = true, idleT = 0;
+    function update() {
+      raf = 0;
+      var tr = track.getBoundingClientRect(), mid = tr.left + tr.width / 2, half = tr.width / 2, best = 0, bestD = Infinity;
+      items.forEach(function (it, i) {
+        var r = it.getBoundingClientRect(), c = r.left + r.width / 2, d = (c - mid) / half, ad = Math.min(1, Math.abs(d));
+        if (!reduceMotion) {
+          it.style.setProperty('--ry', (Math.max(-1, Math.min(1, d)) * -14).toFixed(2) + 'deg');
+          it.style.setProperty('--s', (1 - ad * 0.1).toFixed(3));
+        }
+        it.style.setProperty('--o', (1 - ad * 0.35).toFixed(3));
+        if (Math.abs(c - mid) < bestD) { bestD = Math.abs(c - mid); best = i; }
+      });
+      items.forEach(function (it, i) { it.classList.toggle('is-center', i === best); });
+      cur = best;
+      if (count) count.textContent = (cur + 1) + ' / ' + items.length;
+    }
+    function queue() { if (!raf) raf = window.requestAnimationFrame(update); }
+    function go(i) {
+      i = (i + items.length) % items.length;
+      var it = items[i];
+      track.scrollTo({ left: it.offsetLeft - (track.clientWidth - it.offsetWidth) / 2, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    function hold() { busyR = true; clearTimeout(idleT); idleT = setTimeout(function () { busyR = false; }, 8000); }
+    track.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    var prev = railEl.querySelector('[data-rail-prev]'), next = railEl.querySelector('[data-rail-next]');
+    if (prev) prev.addEventListener('click', function () { hold(); go(cur - 1); });
+    if (next) next.addEventListener('click', function () { hold(); go(cur + 1); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); hold(); go(cur + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); hold(); go(cur - 1); }
+    });
+    railEl.addEventListener('pointerenter', function () { busyR = true; clearTimeout(idleT); });
+    railEl.addEventListener('pointerleave', hold);
+    railEl.addEventListener('focusin', function () { busyR = true; clearTimeout(idleT); });
+    railEl.addEventListener('focusout', hold);
+    track.addEventListener('touchstart', hold, { passive: true });
+    var down = false, sx = 0, sl = 0, moved = false;
+    track.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; moved = false; sx = e.clientX; sl = track.scrollLeft;
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - sx;
+      if (!moved && Math.abs(dx) > 5) { moved = true; track.classList.add('is-drag'); }
+      if (moved) track.scrollLeft = sl - dx;
+    });
+    window.addEventListener('pointerup', function () {
+      if (!down) return;
+      down = false;
+      if (moved) { track.classList.remove('is-drag'); hold(); go(cur); }
+    });
+    track.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    track.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(railEl);
+    if (!reduceMotion) setInterval(function () { if (visible && !busyR && !doc.hidden) go(cur + 1); }, 5000);
+    update();
+  });
+
+  /* ---------------------------------------------------------------- v3 footer: name in dots, pushed by the pointer */
+  toArray(doc.querySelectorAll('[data-dots]')).forEach(function (wrap) {
+    var canvas = wrap.querySelector('canvas'), label = wrap.querySelector('span');
+    if (!canvas || !canvas.getContext) return;
+    var ctx2 = canvas.getContext('2d'), dpr = Math.min(2, window.devicePixelRatio || 1);
+    var pts = [], W = 0, H = 0, mouse = { x: -9999, y: -9999 }, rafD = 0, gap = 7, R = 90;
+    function colours() { var cs = getComputedStyle(root); return { base: cs.getPropertyValue('--dots-base').trim() || '#C9DDE5', hot: cs.getPropertyValue('--dots-hot').trim() || '29,111,150' }; }
+    var col = colours();
+    function build() {
+      W = wrap.clientWidth; H = wrap.clientHeight;
+      if (!W || !H) return;
+      canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+      var off = doc.createElement('canvas'); off.width = W; off.height = H;
+      var o = off.getContext('2d'), fs = Math.min(H * 0.9, W / 6);
+      o.font = '800 ' + fs + "px 'Pretendard Variable', Pretendard, sans-serif";
+      o.textAlign = 'center'; o.textBaseline = 'middle'; o.fillStyle = '#000';
+      o.fillText(label ? label.textContent : 'Lee Yeonsoo', W / 2, H / 2 + fs * 0.04);
+      var px = o.getImageData(0, 0, W, H).data;
+      pts = []; gap = W < 600 ? 5 : 7;
+      for (var y = gap / 2; y < H; y += gap) for (var x = gap / 2; x < W; x += gap) {
+        if (px[(Math.floor(y) * W + Math.floor(x)) * 4 + 3] > 128) pts.push({ hx: x, hy: y, x: x, y: y, vx: 0, vy: 0 });
+      }
+      wrap.classList.add('is-live'); draw();
+    }
+    function draw() {
+      ctx2.setTransform(dpr, 0, 0, dpr, 0, 0); ctx2.clearRect(0, 0, W, H);
+      var moving = false;
+      for (var i = 0; i < pts.length; i++) {
+        var p = pts[i], dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
+        if (d2 < R * R) { var d = Math.sqrt(d2) || 1, f = (1 - d / R) * 2.4; p.vx += dx / d * f; p.vy += dy / d * f; }
+        p.vx += (p.hx - p.x) * 0.06; p.vy += (p.hy - p.y) * 0.06; p.vx *= 0.82; p.vy *= 0.82; p.x += p.vx; p.y += p.vy;
+        if (Math.abs(p.vx) + Math.abs(p.vy) > 0.02) moving = true;
+        var offd = Math.min(1, Math.sqrt((p.x - p.hx) * (p.x - p.hx) + (p.y - p.hy) * (p.y - p.hy)) / 18);
+        ctx2.fillStyle = offd > 0.15 ? 'rgba(' + col.hot + ',' + (0.45 + offd * 0.55).toFixed(2) + ')' : col.base;
+        ctx2.beginPath(); ctx2.arc(p.x, p.y, gap * 0.3, 0, 6.2832); ctx2.fill();
+      }
+      rafD = 0;
+      if ((moving || mouse.x > -9000) && !reduceMotion) rafD = window.requestAnimationFrame(draw);
+    }
+    function kick() { if (!rafD && !reduceMotion) rafD = window.requestAnimationFrame(draw); }
+    wrap.addEventListener('pointermove', function (e) { var r = wrap.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; kick(); });
+    wrap.addEventListener('pointerleave', function () { mouse.x = mouse.y = -9999; kick(); });
+    new MutationObserver(function () { col = colours(); draw(); }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 150); });
+    (doc.fonts && doc.fonts.ready ? doc.fonts.ready : Promise.resolve()).then(build);
+  });
 })();
