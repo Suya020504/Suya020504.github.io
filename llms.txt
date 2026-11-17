@@ -44,7 +44,7 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - 2026.10.28 대상 · 과학기술정보통신부장관상 · 온지붕 · 제3회 미래융합인재 발굴 소프트웨어 챌린지 (일반부) (과학기술정보통신부 · 경산시 · 정보통신기획평가원 · 경산이노베이션아카데미) — 근거: https://www.etnews.com/20261029000100
 - 2026.10.30 최우수상 · 안양시장상 · 필지 블랙박스 · 2026 안양시 공공데이터·AI 활용 대학생 경진대회 (안양시) — 근거: https://anyang.go.kr/main/selectBbsNttView.do?bbsNo=62&key=259&nttNo=460365
 - 2026.10.21 우수상 · 국민체육진흥공단 이사장상 · 먼저봄 · 2026년 국민체육진흥공단 공공데이터 활용 경진대회 (서비스 부문) (국민체육진흥공단) — 근거: https://www.kspo.or.kr/kspo/bbs/B0000099/view.do?menuNo=200435&nttId=64368
-- 2026.10.13 최우수상 · 행정안전부장관상 · 선택에서 필수로 · 제21회 공중화장실 혁신아이디어 공모전 (행정안전부 · 한국화장실협회) · 수상 확정 · 시상 대기 · 시상식 2026.11.18 — 근거: https://jeonju.go.kr/planweb/board/view.9is?boardUid=ff8080818990c349018b1dbaa78e4b41&contentUid=ff8080818990c349018b041a87373953&dataUid=9be517a89eb4c41201a08fa37446413d&page=4&tmpField14=
+- 2026.10.13 최우수상 · 행정안전부장관상 · 선택에서 필수로 · 제21회 공중화장실 혁신아이디어 공모전 (행정안전부 · 한국화장실협회) — 근거: https://jeonju.go.kr/planweb/board/view.9is?boardUid=ff8080818990c349018b1dbaa78e4b41&contentUid=ff8080818990c349018b041a87373953&dataUid=9be517a89eb4c41201a08fa37446413d&page=4&tmpField14=
 - 2026.10.16 우수상 · 179 수요지도 · AI기반 지속 가능한 통일 아이디어 공모전 (고려대학교 세종캠퍼스 통일교육선도대학 사업단)
 - 2026.09.21 대상 · 서울관광재단 대표이사상 · 지금서울 · 2026 비짓서울 API 데이터·AI 활용 아이디어 공모전 (서울관광재단) — 근거: https://api.visitseoul.net/support/notice/view/7?lang=ko&pageNo=1
 - 2026.09.11 최우수상 · 소방청장상 · 사각119 · 제6회 소방안전 빅데이터 활용 및 아이디어 경진대회 (서비스개발 부문) (소방청) — 근거: https://bigdata-119.kr/bbs/view?bbsctt_id=580
