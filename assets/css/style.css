@@ -1545,14 +1545,17 @@ dialog.zoom::backdrop { background: rgba(13,26,32,.72); }
 #projects .filter-sep { display: none; }
 #projects .award-toggle { margin: 0 0 8px auto; }
 
-/* ================================================================ v3.3: constellation background (replaces the v3.2 video)
+/* ================================================================ v3.4: data -> AI analysis -> AX flow (replaces the v3.3 constellation)
    Small stars joined into constellations by hairlines, twinkling slowly; stronger on the portrait side,
    faint behind the copy. The nearest figure brightens a little under the pointer. */
 .hero-stars { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; display: block; pointer-events: none; opacity: 0; transition: opacity 1.6s var(--ease);
-  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.3), #000 58%), linear-gradient(180deg, #000 70%, transparent 98%);
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.45), #000 46%), linear-gradient(180deg, #000 78%, transparent 99%);
   -webkit-mask-composite: source-in;
-          mask-image: linear-gradient(90deg, rgba(0,0,0,.3), #000 58%), linear-gradient(180deg, #000 70%, transparent 98%);
+          mask-image: linear-gradient(90deg, rgba(0,0,0,.45), #000 46%), linear-gradient(180deg, #000 78%, transparent 99%);
           mask-composite: intersect; }
+@media (max-width: 860px) {
+  .hero-stars { -webkit-mask-image: linear-gradient(180deg, #000 44%, rgba(0,0,0,.25) 62%, transparent 92%); mask-image: linear-gradient(180deg, #000 44%, rgba(0,0,0,.25) 62%, transparent 92%); }
+}
 .hero-stars.is-live { opacity: 1; }
 .hero.has-stars::after { display: none; }
 
