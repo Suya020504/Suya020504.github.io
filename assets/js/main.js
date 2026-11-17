@@ -761,4 +761,44 @@
     if (host) host.classList.add('has-stars');
     if (!reduceMotion) window.requestAnimationFrame(loop);
   });
+
+  /* ---------------------------------------------------------------- v3.5 archive page tabs (archive.html)
+     Without JS every panel is listed; with JS one panel shows at a time, chosen by the URL hash. */
+  (function () {
+    var bar = doc.querySelector('[data-arch-tabs]');
+    if (!bar) return;
+    var tabs = toArray(bar.querySelectorAll('[data-arch-tab]')), panels = toArray(doc.querySelectorAll('[data-arch-panel]'));
+    if (!tabs.length) return;
+    root.classList.add('arch-js');
+    function show(id, focus) {
+      var target = null;
+      if (!panels.some(function (p) { return p.id === id; })) {
+        // a deep link such as #press-xyz: open the panel that holds it, then bring it into view
+        var el = id ? doc.getElementById(id) : null;
+        var host = el && el.closest ? el.closest('[data-arch-panel]') : null;
+        if (host) { target = el; id = host.id; } else id = tabs[0].getAttribute('data-arch-tab');
+      }
+      tabs.forEach(function (t) { var on = t.getAttribute('data-arch-tab') === id; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
+      panels.forEach(function (p) { p.hidden = p.id !== id; });
+      if (focus) { var cur = tabs.filter(function (t) { return t.getAttribute('data-arch-tab') === id; })[0]; if (cur) cur.focus(); }
+      if (target) target.scrollIntoView({ block: 'start' });
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function (e) {
+        e.preventDefault();
+        var id = t.getAttribute('data-arch-tab');
+        if (history.replaceState) history.replaceState(null, '', '#' + id);
+        show(id, false);
+        bar.scrollIntoView({ block: 'start', behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+      t.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        e.preventDefault();
+        var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        n.click(); n.focus();
+      });
+    });
+    window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+    show(location.hash.slice(1), false);
+  })();
 })();

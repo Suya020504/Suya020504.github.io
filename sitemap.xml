@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://suya0504.vercel.app/</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://suya0504.vercel.app/projects.html</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://suya0504.vercel.app/awards.html</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://suya0504.vercel.app/talks.html</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://suya0504.vercel.app/press.html</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://suya0504.vercel.app/writing.html</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://suya0504.vercel.app/projects/tourism-stay-gap/</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://suya0504.vercel.app/projects/sagak119/</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://suya0504.vercel.app/projects/your-professor/</loc><lastmod>2026-11-18</lastmod></url>
@@ -19,4 +24,5 @@
   <url><loc>https://suya0504.vercel.app/projects/fci-ieumsup/</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://suya0504.vercel.app/projects/malitda/</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://suya0504.vercel.app/projects/no-logo-remix/</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://suya0504.vercel.app/projects/letter-2047/</loc><lastmod>2026-11-18</lastmod></url>
 </urlset>
