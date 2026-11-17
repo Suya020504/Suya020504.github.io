@@ -183,7 +183,7 @@
       if (countEl) {
         // name the active filter so the live region makes sense on its own
         var active = catBtns.filter(function (b) { return b.getAttribute('data-cat') === state.cat; })[0];
-        var label = (active ? active.textContent : '전체') + (state.award ? ' · 수상작' : '');
+        var label = (active ? (active.getAttribute('data-label') || active.textContent) : '전체') + (state.award ? ' · 수상작' : '');
         if (isDefault && !fold) countEl.textContent = '전체 ' + cards.length + '개 프로젝트';
         else if (fold) countEl.textContent = '전체 ' + cards.length + '개 중 ' + shown + '개 표시 · 대표 프로젝트 ' + nFeatured + '개는 포트폴리오에 있습니다';
         else countEl.textContent = label + ': ' + cards.length + '개 중 ' + shown + '개 표시';
@@ -599,5 +599,40 @@
     new MutationObserver(function () { col = colours(); draw(); }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
     var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 150); });
     (doc.fonts && doc.fonts.ready ? doc.fonts.ready : Promise.resolve()).then(build);
+  });
+
+  /* ---------------------------------------------------------------- v3.2 hero video (light theme)
+     Two copies of the generated clip cross-fade near the end for a seamless loop. Not loaded in dark theme,
+     with data-saver or reduced motion: the WebGL gradient stays there. */
+  toArray(doc.querySelectorAll('[data-hero-video]')).forEach(function (wrap) {
+    var conn = navigator.connection || {};
+    if (reduceMotion || conn.saveData) return;
+    var vids = wrap.querySelectorAll('video');
+    if (vids.length < 2) return;
+    var a = vids[0], b = vids[1], FADE = 1.6, cur = a, swapping = false, visible = true, loaded = false;
+    function play(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    function shown() { return getComputedStyle(wrap).display !== 'none'; }
+    function load() {
+      if (loaded || !shown()) return;
+      loaded = true;
+      [a, b].forEach(function (v) { v.muted = true; v.preload = 'auto'; v.src = wrap.getAttribute('data-src'); });
+      a.addEventListener('playing', function () { wrap.classList.add('is-live'); }, { once: true });
+      a.classList.add('is-on');
+      play(a);
+    }
+    function swap() {
+      var old = cur, next = cur === a ? b : a;
+      swapping = true; next.currentTime = 0; play(next);
+      old.classList.remove('is-on'); old.classList.add('is-prev'); next.classList.add('is-on'); cur = next;
+      setTimeout(function () { old.classList.remove('is-prev'); old.pause(); swapping = false; }, FADE * 1000 + 120);
+    }
+    [a, b].forEach(function (v) {
+      v.addEventListener('timeupdate', function () { if (v === cur && !swapping && v.duration && v.currentTime >= v.duration - FADE) swap(); });
+    });
+    function sync() { if (!loaded) return; if (visible && !doc.hidden && shown()) play(cur); else { a.pause(); b.pause(); } }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; sync(); }).observe(wrap);
+    doc.addEventListener('visibilitychange', sync);
+    new MutationObserver(function () { load(); sync(); }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    load();
   });
 })();

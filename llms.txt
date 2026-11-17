@@ -63,6 +63,7 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - 농산물 소득조사 데이터 분석: 농촌진흥청장상 확정 · 상격은 결선 후
 
 ## 심사·결과 대기
+- LOTTE AX CHALLENGE 2026: 본선 진출
 - 다봄 팀 · 식품 데이터 캡스톤: 참가팀 선정 · 과제 수행 중
 - 선입금시그널 · SafeCall: 서류심사 합격 · 예선 상세기획서 준비
 - 미래한입 · 상상해봐: 참가팀 선정 · 메이커톤 준비
@@ -82,6 +83,11 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - 2026.11.06 「간 맞춤표」 2차 발표평가 (예정) · 2026 국가표준식품성분DB 활용 아이디어 공모전
 
 ## 보도
+- 2026.11.16 충북대학교 (대학 뉴스) — [온지붕, 미래융합인재 발굴 SW 챌린지 대상](https://cbnu.ac.kr/www/selectBbsNttView.do?key=548&bbsNo=14&nttNo=171650)
+  - 2026.11.03 공뉴스 — [공뉴스 기사](https://www.bzeronews.com/news/articleView.html?idxno=824736)
+  - 2026.11.03 베리타스알파 — [베리타스알파 기사](https://www.veritas-a.com/news/articleView.html?idxno=634941)
+  - 2026.11.03 국제뉴스 — [국제뉴스 기사](https://www.gukjenews.com/news/articleView.html?idxno=3740694)
+  - 2026.11.03 동양일보 — [동양일보 기사](https://www.dynews.co.kr/news/articleView.html?idxno=872375)
 - 2026.10.29 전자신문 — [경산이노베이션아카데미 'AI로 일상의 문제를 해결하다'… 전국 163개 팀 SW 챌린지 도전](https://www.etnews.com/20261029000100)
 - 2026.10.01 베리타스알파 — [관광데이터 분석 포스터 공모전 우수상](https://www.veritas-a.com/news/articleView.html?idxno=630262)
 - 2026.09.30 DKU WEBZINE (단국대학교) — [단국대 이연수 학생(수학과), ‘제6회 소방안전 빅데이터 경진대회’ 소방청장상 수상](https://webzine.dankook.ac.kr/news/articleView.html?idxno=1368)

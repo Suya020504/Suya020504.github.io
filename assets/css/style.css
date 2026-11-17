@@ -1492,3 +1492,67 @@ dialog.zoom::backdrop { background: rgba(13,26,32,.72); }
   .ask-avs.is-speaking::after, .typing i, .msg { animation: none; }
   .rail-item { transform: none; }
 }
+
+/* ================================================================ v3.1: experience, teaching, archive tabs, logo */
+
+/* header mark: soft lift so the deeper monogram sits on the glass bar */
+.wordmark .mark { width: 32px; height: 32px; border-radius: 10px; box-shadow: 0 6px 14px -8px rgba(29,111,150,.55); transition: transform .3s var(--ease); }
+.wordmark:hover .mark { transform: rotate(-6deg) scale(1.04); }
+
+/* experience: date column | marker on the rail | content card */
+#experience .timeline { max-width: 1000px; padding-left: 0; display: grid; gap: 14px; }
+#experience .timeline::before { left: 189px; top: 24px; bottom: 24px; }
+#experience .tl-item { display: grid; grid-template-columns: 150px 40px minmax(0, 1fr); column-gap: 18px; align-items: start; padding: 0; }
+.tl-when { padding-top: 16px; text-align: right; }
+.tl-when .tl-date { display: inline; font-size: .8125rem; font-weight: 700; color: var(--sky-ink); font-variant-numeric: tabular-nums; line-height: 1.5; }
+#experience .tl-marker { position: relative; left: auto; top: auto; margin-top: 8px; z-index: 1; }
+#experience .tl-content { position: relative; padding: 16px 20px 18px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface);
+  transition: border-color .25s, box-shadow .25s, transform .25s var(--ease); }
+#experience .tl-content h3 { margin-top: 0; }
+@media (hover: hover) { #experience .tl-content:hover { border-color: var(--sky); box-shadow: var(--shadow-md); transform: translateY(-2px); } }
+#experience .tl-item.is-now .tl-content { border-color: var(--mint); background: linear-gradient(160deg, var(--surface) 55%, var(--mint-soft)); }
+.now-pill { float: right; margin: 2px 0 6px 10px; padding: 3px 10px; border-radius: 999px; background: var(--mint-soft); color: var(--mint-ink); font-size: .75rem; font-weight: 700; }
+@media (max-width: 720px) {
+  #experience .timeline::before { left: 19px; }
+  #experience .tl-item { grid-template-columns: 40px minmax(0, 1fr); column-gap: 14px; }
+  #experience .tl-when { grid-column: 2; grid-row: 1; text-align: left; padding: 0 0 6px; }
+  #experience .tl-marker { grid-column: 1; grid-row: 1 / span 2; margin-top: 0; }
+  #experience .tl-content { grid-column: 2; }
+}
+
+/* teaching: calmer panels, a count beside each title, rows that read like a ledger */
+.t-panel { padding: 20px 22px 6px; border-radius: 18px; box-shadow: var(--shadow-sm); transition: border-color .25s, box-shadow .25s; }
+@media (hover: hover) { .t-panel:hover { border-color: var(--sky); box-shadow: var(--shadow-md); } }
+.t-head { gap: 10px; padding-bottom: 12px; }
+.t-head > span:not(.e-tile):first-of-type { flex: 1; }
+.t-count { margin-left: auto; min-width: 26px; padding: 2px 8px; border-radius: 999px; background: var(--sky-soft); color: var(--sky-ink); font-size: .75rem; font-weight: 750; text-align: center; font-variant-numeric: tabular-nums; }
+.t-item { padding: 12px 0 13px; }
+.t-topic { font-size: .9688rem; }
+.t-date { font-variant-numeric: tabular-nums; font-weight: 600; }
+
+/* archive: tabs with counts instead of floating chips */
+#projects .filters { align-items: flex-end; gap: 10px 16px; margin-bottom: 18px; border-bottom: 1px solid var(--border); }
+#projects .chips { gap: 2px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+#projects .chips::-webkit-scrollbar { display: none; }
+#projects .chip.tab { position: relative; flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 12px 14px 14px; border: 0; border-radius: 0; background: none; color: var(--muted); font-weight: 650; }
+#projects .chip.tab::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: var(--sky-ink); transform: scaleX(0); transition: transform .3s var(--ease); }
+#projects .chip.tab:hover { color: var(--text); }
+#projects .chip.tab[aria-pressed="true"] { background: none; color: var(--text); }
+#projects .chip.tab[aria-pressed="true"]::after { transform: scaleX(1); }
+.tab-n { padding: 1px 7px; border-radius: 999px; background: var(--surface-2); color: var(--muted); font-size: .75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+#projects .chip.tab[aria-pressed="true"] .tab-n { background: var(--sky-soft); color: var(--sky-ink); }
+#projects .filter-sep { display: none; }
+#projects .award-toggle { margin: 0 0 8px auto; }
+
+/* ================================================================ v3.2: generated moving background (light theme only) */
+.hero-video { position: absolute; inset: 0; z-index: -2; pointer-events: none; opacity: 0; transition: opacity 1.4s var(--ease);
+  -webkit-mask-image: linear-gradient(180deg, #000 64%, transparent 98%); mask-image: linear-gradient(180deg, #000 64%, transparent 98%); }
+.hero-video.is-live { opacity: 1; }
+.hero-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.hero-video video.is-prev { opacity: 1; z-index: 1; }
+.hero-video video.is-on { opacity: 1; z-index: 2; transition: opacity 1.6s linear; }
+.hero-video::after { content: ""; position: absolute; inset: 0; z-index: 3; background: linear-gradient(90deg, var(--paper), transparent 62%); }
+.hero:has(.hero-video.is-live)::before { opacity: .25; }
+:root[data-theme="dark"] .hero-video { display: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero-video { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
