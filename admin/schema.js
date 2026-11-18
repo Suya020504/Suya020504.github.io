@@ -109,6 +109,7 @@
         { k: 'award', l: '수상 표시', t: 'text' },
         { k: 'summary', l: '요약', t: 'textarea' },
         { k: 'lead', l: '대표 기사', t: 'bool' },
+        { k: 'highlight', l: '첫 화면에 보이기 (4건까지, 최신 순)', t: 'bool' },
         { k: 'mentions', l: '내 이름 언급', t: 'select', options: [['name', '이름이 나옴'], ['team', '팀만 나옴']] },
         { k: 'photo', l: '대표 사진', t: 'object', fields: [
           { k: 'src', l: '사진', t: 'image', folder: 'media/press', maxW: 1200 },
