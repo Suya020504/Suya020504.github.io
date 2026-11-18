@@ -377,22 +377,45 @@
   }
 
   /* ---------------------------------------------------------------- v3 ask panel ("talking portfolio")
-     Answers come from the page's JSON (built from content.json). Typing effect; optional Korean speech. */
+     Answers come from the page's JSON (built from content.json). Typing effect; optional Korean speech.
+     v3.11: a line with "audio" plays its Gemini TTS recording (one shared <audio>, unlocked by the speaker
+     button's click so later lines may play on phones too); other lines fall back to the browser's voice. */
   var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
   var synth = window.speechSynthesis || null, koVoice = null, voiceOn = false;
+  var player = window.Audio ? new Audio() : null, hasRec = !!doc.querySelector('[data-talk-rec]');
+  if (player) player.preload = 'auto';
+  function showVoice() { toArray(doc.querySelectorAll('[data-voice]')).forEach(function (b) { b.hidden = !(koVoice || (hasRec && player)); }); }
   function pickVoice() {
-    if (!synth) return;
-    koVoice = (synth.getVoices() || []).filter(function (v) { return /^ko([-_]|$)/i.test(v.lang); })[0] || null;
-    toArray(doc.querySelectorAll('[data-voice]')).forEach(function (b) { b.hidden = !koVoice; });
+    if (synth) koVoice = (synth.getVoices() || []).filter(function (v) { return /^ko([-_]|$)/i.test(v.lang); })[0] || null;
+    showVoice();
   }
   if (synth) { pickVoice(); if (synth.addEventListener) synth.addEventListener('voiceschanged', pickVoice); }
-  function speak(text) {
+  showVoice();
+  var current = null;
+  function stopVoice() {
+    if (player) { player.pause(); player.removeAttribute('src'); }
+    if (synth) synth.cancel();
+    if (current) { var c = current; current = null; c(); }
+  }
+  // speak(line): resolves when the line has been said; onStart(ms) tells the typer how long the audio runs
+  function speak(line, onStart) {
     return new Promise(function (resolve) {
-      if (!voiceOn || !synth || !koVoice) return resolve();
-      var u = new SpeechSynthesisUtterance(text.replace(/[→·]/g, ' '));
+      var done = false, fin = function () { if (!done) { done = true; current = null; resolve(); } };
+      if (!voiceOn) return resolve();
+      current = fin;
+      if (line.audio && player) {
+        player.onended = fin; player.onerror = function () { fin(); };
+        player.onloadedmetadata = function () { if (onStart && isFinite(player.duration)) onStart(player.duration * 1000); };
+        player.src = line.audio;
+        var pr = player.play();
+        if (pr && pr.catch) pr.catch(fin);
+        setTimeout(fin, 4000 + line.text.length * 400);
+        return;
+      }
+      if (!synth || !koVoice) return fin();
+      var u = new SpeechSynthesisUtterance(line.text.replace(/[→·]/g, ' '));
       u.voice = koVoice; u.lang = koVoice.lang;
-      var done = false, fin = function () { if (!done) { done = true; resolve(); } };
-      u.onend = fin; u.onerror = fin; setTimeout(fin, 1200 + text.length * 170);
+      u.onend = fin; u.onerror = fin; setTimeout(fin, 1200 + line.text.length * 170);
       synth.speak(u);
     });
   }
@@ -400,7 +423,15 @@
     b.addEventListener('click', function () {
       voiceOn = !voiceOn;
       toArray(doc.querySelectorAll('[data-voice]')).forEach(function (x) { x.setAttribute('aria-pressed', voiceOn ? 'true' : 'false'); });
-      if (!voiceOn && synth) synth.cancel();
+      if (voiceOn && player && hasRec) {  // unlock playback inside this click (iOS / autoplay rules)
+        var first = doc.querySelector('[data-talk-rec]');
+        player.src = first ? first.getAttribute('data-talk-rec') : '';
+        player.muted = true;
+        var pr = player.play();
+        var unmute = function () { player.pause(); player.muted = false; };
+        if (pr && pr.then) pr.then(unmute, unmute); else unmute();
+      }
+      if (!voiceOn) stopVoice();
     });
   });
   toArray(doc.querySelectorAll('[data-talk]')).forEach(function (panel) {
@@ -434,15 +465,16 @@
       row.appendChild(bubble); log.appendChild(row); scroll();
       if (mine || reduceMotion || hurry) {
         text.textContent = line.text;
-        if (!mine && voiceOn && !hurry) { setSpeaking(true); await speak(line.text); setSpeaking(false); }
+        if (!mine && voiceOn && !hurry) { setSpeaking(true); await speak(line); setSpeaking(false); }
       } else {
         setSpeaking(true);
         var dots = doc.createElement('span'); dots.className = 'typing'; dots.innerHTML = '<i></i><i></i><i></i>'; dots.setAttribute('aria-hidden', 'true');
         text.appendChild(dots);
         await pause(480);
         text.textContent = ''; text.setAttribute('aria-hidden', 'true');
-        var spoken = speak(line.text), chs = Array.from(line.text), talking = voiceOn && koVoice;
+        var chs = Array.from(line.text), talking = voiceOn && ((line.audio && player) || koVoice);
         var per = talking ? 58 : 18, step = !talking && chs.length > 36 ? 2 : 1;
+        var spoken = speak(line, function (ms) { per = Math.max(24, Math.min(140, ms * 0.92 / Math.max(1, chs.length))); });
         for (var i = step; i <= chs.length + step - 1 && !hurry; i += step) {
           text.textContent = chs.slice(0, i).join('');
           if (i % 8 === 0) scroll();
@@ -472,7 +504,7 @@
         if (c.link && ans.length) ans[ans.length - 1] = { who: ans[ans.length - 1].who, text: ans[ans.length - 1].text, link: c.link };
         var lines = [{ who: 'visitor', text: c.q }].concat(ans);
         start();
-        if (busy) { hurry = true; queued = lines; if (synth && voiceOn) synth.cancel(); return; }
+        if (busy) { hurry = true; queued = lines; if (voiceOn) stopVoice(); return; }
         run(lines);
       });
       chipsEl.appendChild(b);
