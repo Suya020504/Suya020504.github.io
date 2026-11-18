@@ -601,162 +601,71 @@
     (doc.fonts && doc.fonts.ready ? doc.fonts.ready : Promise.resolve()).then(build);
   });
 
-  /* ---------------------------------------------------------------- v3.4 hero background: DATA -> AI ANALYSIS -> AX
-     Data points drift in from the left and feed the input layer of a small neural network; signals travel
-     layer to layer as light pulses, and the output layer answers with soft ripples. Labels name the stages.
-     ~30fps, paused off screen; reduced motion draws one still frame. Colours: --star (sky) / --star-2 (mint). */
+  /* ---------------------------------------------------------------- v3.10 hero background: flowing words (option E)
+     Three rows of large keywords drift sideways in opposite directions behind the hero, like a motion poster:
+     outlined in sky, the middle row filled faintly in mint. Rows come from data-rows ("A|B|C", built from
+     content). ~30fps, paused off screen; reduced motion draws one still frame. Colours: --star / --star-2. */
   toArray(doc.querySelectorAll('[data-stars]')).forEach(function (cv) {
     var g = cv.getContext && cv.getContext('2d');
     if (!g) return;
     var host = cv.parentElement, dpr = Math.min(2, window.devicePixelRatio || 1);
-    var W = 0, H = 0, layers = [], edges = [], out = {}, pulses = [], ripples = [], dots = [], wide = true;
-    var col = { a: '29,111,150', b: '26,122,96' }, visible = true, last = 0, spawnAt = 0, lastT = 0;
-    var NAMES = ['DATA', 'AI ANALYSIS', 'AI ANALYSIS', 'AX'];
+    var W = 0, H = 0, rows = [], visible = true, last = 0, t0 = performance.now();
+    var col = { a: '29,111,150', b: '26,122,96' };
+    var FONT = "'Pretendard Variable', Pretendard, sans-serif";
+    var words = (cv.getAttribute('data-rows') || 'DATA · AI · AX|AI 서비스 기획|FROM DATA TO SERVICE').split('|')
+      .map(function (w) { return w.trim(); }).filter(Boolean);
     function readColours() {
       var cs = getComputedStyle(root);
       col.a = cs.getPropertyValue('--star').trim() || col.a;
       col.b = cs.getPropertyValue('--star-2').trim() || col.b;
     }
     function rgba(c, a) { return 'rgba(' + c + ',' + Math.max(0, Math.min(1, a)).toFixed(3) + ')'; }
-    function rnd(a, b) { return a + Math.random() * (b - a); }
+    function setFont(px) {
+      g.font = '800 ' + px + 'px ' + FONT;
+      if (g.letterSpacing !== undefined) g.letterSpacing = Math.round(-px * 0.02) + 'px';
+    }
     function build() {
       W = cv.clientWidth; H = cv.clientHeight;
       if (!W || !H) return;
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-      wide = W >= 860;
-      // network region: right half on wide screens, the band behind the portrait on phones
-      var xs = wide ? [0.50, 0.64, 0.78, 0.93] : [0.10, 0.37, 0.63, 0.90];
-      var y0 = wide ? 0.16 : 0.07, y1 = wide ? 0.80 : 0.40;
-      var counts = wide ? [6, 7, 6, 3] : [5, 6, 5, 3];
-      layers = xs.map(function (fx, li) {
-        var n = counts[li], nodes = [];
-        for (var i = 0; i < n; i++) {
-          var t = n === 1 ? 0.5 : i / (n - 1);
-          var y = (y0 + (y1 - y0) * (0.12 + 0.76 * t)) * H;
-          var bow = Math.sin(t * Math.PI) * (wide ? 18 : 10) * (li % 2 ? 1 : -1);
-          nodes.push({ x: fx * W + bow + rnd(-6, 6), y: y + rnd(-5, 5), glow: 0, r: li === 3 ? 4.6 : 3.4 });
-        }
-        return nodes;
+      g.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var wide = W >= 860;
+      // wide: three bands over the whole hero (the mask fades them behind the copy); phones: the band behind the portrait
+      var big = wide ? Math.max(64, Math.min(124, W * 0.075)) : Math.max(42, W * 0.13);
+      var ys = wide ? [0.27, 0.56, 0.86] : [0.10, 0.19, 0.28];
+      rows = words.slice(0, 3).map(function (w, i) {
+        var px = i === 1 ? big * 0.6 : big, txt = w + '  ·  ';
+        setFont(px);
+        return { txt: txt, px: px, w: Math.max(40, g.measureText(txt).width), y: ys[i] * H + px * 0.36,
+                 dir: i % 2 ? -1 : 1, v: (wide ? 24 : 16) * (i === 1 ? 0.8 : 1), kind: i };
       });
-      edges = []; out = {};
-      for (var li = 0; li < layers.length - 1; li++) {
-        var A = layers[li], B = layers[li + 1];
-        A.forEach(function (a, i) {
-          var c = (i + 0.5) / A.length * B.length;
-          B.forEach(function (b, j) {
-            if (Math.abs(j + 0.5 - c) <= 1.6) {
-              var e = { l: li, i: i, j: j, w: rnd(0.5, 1) };
-              edges.push(e);
-              (out[li + ':' + i] = out[li + ':' + i] || []).push(e);
-            }
-          });
-        });
-      }
-      dots = [];
-      var nd = wide ? 34 : 22;
-      for (var k = 0; k < nd; k++) dots.push(newDot(true));
-      pulses = []; ripples = [];
-      draw(performance.now(), true);
+      draw(performance.now());
     }
-    function newDot(anywhere) {
-      var target = Math.floor(Math.random() * layers[0].length), tn = layers[0][target];
-      var x0 = anywhere ? rnd(0, tn.x - 20) : rnd(-30, 0);
-      return { x: x0, y: tn.y + rnd(-H * 0.18, H * 0.18), t: target, v: rnd(16, 34), sq: Math.random() < 0.45, a: rnd(0.35, 0.7) };
-    }
-    function fire(li, i) {
-      var opts = out[li + ':' + i];
-      if (!opts || !opts.length) return;
-      var e = opts[Math.floor(Math.random() * opts.length)];
-      pulses.push({ e: e, p: 0, d: rnd(0.75, 1.15) });
-    }
-    function step(dt, now) {
-      // data drifting toward the input layer
-      dots.forEach(function (d, k) {
-        var tn = layers[0][d.t], dx = tn.x - d.x, dy = tn.y - d.y, dist = Math.hypot(dx, dy) || 1;
-        d.x += dx / dist * d.v * dt; d.y += dy / dist * d.v * dt * 0.9 + Math.sin(now / 900 + k) * 0.08;
-        if (dist < 7) { tn.glow = 1; fire(0, d.t); dots[k] = newDot(false); }
-      });
-      // a little spontaneous activity too
-      if (now > spawnAt) { fire(0, Math.floor(Math.random() * layers[0].length)); spawnAt = now + rnd(700, 1400); }
-      pulses = pulses.filter(function (p) {
-        p.p += dt / p.d;
-        if (p.p < 1) return true;
-        var to = layers[p.e.l + 1][p.e.j];
-        to.glow = 1;
-        if (p.e.l + 1 === layers.length - 1) ripples.push({ x: to.x, y: to.y, r: to.r, a: 0.55 });
-        else if (Math.random() < 0.9) fire(p.e.l + 1, p.e.j);
-        return false;
-      });
-      ripples = ripples.filter(function (r) { r.r += 26 * dt; r.a -= 0.42 * dt; return r.a > 0; });
-      layers.forEach(function (L) { L.forEach(function (n) { n.glow = Math.max(0, n.glow - dt * 1.4); }); });
-    }
-    function draw(now, still) {
+    function draw(now) {
+      var t = (now - t0) / 1000;
       g.setTransform(dpr, 0, 0, dpr, 0, 0);
       g.clearRect(0, 0, W, H);
-      // edges
-      g.lineWidth = 1;
-      edges.forEach(function (e) {
-        var a = layers[e.l][e.i], b = layers[e.l + 1][e.j];
-        g.strokeStyle = rgba(col.a, 0.10 + 0.08 * e.w);
-        g.beginPath(); g.moveTo(a.x, a.y); g.lineTo(b.x, b.y); g.stroke();
-      });
-      // data points
-      dots.forEach(function (d) {
-        g.fillStyle = rgba(col.a, d.a * 0.55);
-        if (d.sq) g.fillRect(d.x - 1.6, d.y - 1.6, 3.2, 3.2);
-        else { g.beginPath(); g.arc(d.x, d.y, 1.7, 0, 6.2832); g.fill(); }
-      });
-      // pulses with a short trail
-      pulses.forEach(function (p) {
-        var a = layers[p.e.l][p.e.i], b = layers[p.e.l + 1][p.e.j], c = p.e.l >= 1 ? col.b : col.a;
-        for (var s = 0; s < 4; s++) {
-          var q = Math.max(0, p.p - s * 0.05), x = a.x + (b.x - a.x) * q, y = a.y + (b.y - a.y) * q;
-          g.fillStyle = rgba(c, 0.85 - s * 0.2);
-          g.beginPath(); g.arc(x, y, 2.4 - s * 0.45, 0, 6.2832); g.fill();
+      rows.forEach(function (r) {
+        setFont(r.px);
+        var off = ((t * r.v * r.dir) % r.w + r.w) % r.w - r.w;
+        if (r.kind === 1) g.fillStyle = rgba(col.b, 0.12);
+        else { g.strokeStyle = rgba(r.kind ? col.b : col.a, r.kind ? 0.3 : 0.24); g.lineWidth = 1.2; }
+        for (var x = off; x < W; x += r.w) {
+          if (r.kind === 1) g.fillText(r.txt, x, r.y); else g.strokeText(r.txt, x, r.y);
         }
-      });
-      // nodes
-      layers.forEach(function (L, li) {
-        var c = li >= 2 ? col.b : col.a;
-        L.forEach(function (n) {
-          if (n.glow > 0.02) { g.fillStyle = rgba(c, 0.18 * n.glow); g.beginPath(); g.arc(n.x, n.y, n.r + 7 * n.glow, 0, 6.2832); g.fill(); }
-          g.fillStyle = rgba(c, 0.5 + 0.45 * n.glow);
-          g.beginPath(); g.arc(n.x, n.y, n.r, 0, 6.2832); g.fill();
-          g.strokeStyle = rgba(c, 0.35); g.lineWidth = 1;
-          g.beginPath(); g.arc(n.x, n.y, n.r + 2.5, 0, 6.2832); g.stroke();
-        });
-      });
-      ripples.forEach(function (r) { g.strokeStyle = rgba(col.b, r.a); g.lineWidth = 1.4; g.beginPath(); g.arc(r.x, r.y, r.r, 0, 6.2832); g.stroke(); });
-      // stage labels under the layers
-      g.font = '700 ' + (wide ? 11 : 9.5) + "px 'Pretendard Variable', Pretendard, sans-serif";
-      g.textAlign = 'center';
-      var seen = {};
-      layers.forEach(function (L, li) {
-        var name = NAMES[li];
-        if (seen[name] && name === 'AI ANALYSIS') return;
-        var xs = name === 'AI ANALYSIS' ? (layers[1][0].x + layers[2][0].x) / 2 : L[0].x;
-        var yb = Math.max.apply(null, L.map(function (n) { return n.y; })) + (wide ? 34 : 24);
-        seen[name] = 1;
-        g.fillStyle = rgba(li >= 2 && name === 'AX' ? col.b : col.a, 0.62);
-        if (g.letterSpacing !== undefined) g.letterSpacing = '2px';
-        g.fillText(name, xs, yb);
       });
     }
     function loop(now) {
-      if (visible && !doc.hidden && now - last >= 33) {
-        var dt = lastT ? Math.min(0.05, (now - lastT) / 1000) : 0.016;
-        lastT = now; last = now;
-        step(dt, now); draw(now);
-      } else if (!visible || doc.hidden) { lastT = 0; }
+      if (visible && !doc.hidden && now - last >= 33) { last = now; draw(now); }
       window.requestAnimationFrame(loop);
     }
     readColours();
-    new MutationObserver(function () { readColours(); draw(performance.now(), true); }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
-    var dm = mq('(prefers-color-scheme: dark)'); if (dm.addEventListener) dm.addEventListener('change', function () { readColours(); draw(performance.now(), true); });
+    new MutationObserver(function () { readColours(); draw(performance.now()); }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    var dm = mq('(prefers-color-scheme: dark)'); if (dm.addEventListener) dm.addEventListener('change', function () { readColours(); draw(performance.now()); });
     if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(cv);
     var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 200); });
     build();
-    if (reduceMotion) { for (var w = 0; w < 40; w++) step(0.05, performance.now() + w * 50); draw(performance.now(), true); }
+    (doc.fonts && doc.fonts.ready ? doc.fonts.ready : Promise.resolve()).then(build);
     cv.classList.add('is-live');
     if (host) host.classList.add('has-stars');
     if (!reduceMotion) window.requestAnimationFrame(loop);
