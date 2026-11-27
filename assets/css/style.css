@@ -1734,3 +1734,141 @@ html:not(.arch-js) .arch-panel + .arch-panel { margin-top: 72px; }
   .hero-stars { -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.3), rgba(0,0,0,.3) 34%, #000 58%), linear-gradient(180deg, #000 78%, transparent 99%);
                 mask-image: linear-gradient(90deg, rgba(0,0,0,.3), rgba(0,0,0,.3) 34%, #000 58%), linear-gradient(180deg, #000 78%, transparent 99%); }
 }
+
+/* ================================================================ v3.12 (2026-11-27): visual refinement pass
+   Cohesive elevation, landscape press thumbnails, tighter cover-flow cards, editorial award ledger, subtle card accents. */
+
+/* header + archive tabs: slightly crisper separation on scroll, zero mobile tab clipping */
+.site-header.is-scrolled { box-shadow: 0 10px 24px -18px rgba(19,48,59,.36); }
+.arch-tabs { box-shadow: var(--shadow-sm); }
+@media (max-width: 560px) {
+  .arch-tabs { gap: 2px; padding: 5px; }
+  .arch-tab { padding: 8px 11px; font-size: .875rem; }
+}
+
+/* hero: refined badge tactility, portrait ambient glow, overflow safety on medium desktops */
+.hero-badge { box-shadow: var(--shadow-sm); }
+a.hero-badge:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+@media (min-width: 561px) {
+  .hero-badges { grid-template-columns: repeat(2, minmax(0, max-content)); gap: 8px; }
+}
+.portrait {
+  box-shadow: 0 0 0 6px var(--ring-halo), 0 0 54px 6px var(--halo), var(--portrait-shadow);
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+@media (hover: hover) {
+  .portrait:hover { transform: translateY(-3px); box-shadow: 0 0 0 7px var(--ring-halo), 0 0 62px 10px var(--halo), var(--portrait-shadow); }
+}
+
+/* ask panel: top accent line on stat tiles, softer glass header, tactile chips */
+.ask-facts li {
+  position: relative; overflow: hidden; box-shadow: var(--shadow-sm);
+  transition: transform .25s var(--ease), border-color .25s, box-shadow .25s;
+}
+.ask-facts li::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 3px;
+  background: linear-gradient(90deg, var(--sky), var(--mint));
+}
+@media (hover: hover) {
+  .ask-facts li:hover { transform: translateY(-2px); border-color: var(--sky); box-shadow: var(--shadow-md); }
+}
+.ask-head { background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%); }
+.ask-chips { background: var(--surface); }
+.ask-chips .chip { transition: transform .18s var(--ease), border-color .2s, color .2s, background-color .2s, box-shadow .2s; }
+@media (hover: hover) {
+  .ask-chips .chip:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+}
+
+/* project cover-flow: fix extra top gap on award-tag, crisp screenshot divider, 2-line summary clamp, archive CTA */
+.rail-img { border-bottom: 1px solid var(--border); }
+.rail-meta { gap: 7px; padding: 16px 18px 18px; }
+.rail-meta .award-tag { margin-top: 0; font-size: .8125rem; line-height: 1.4; }
+.rail-meta small {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  white-space: normal; line-height: 1.5;
+}
+.rail-item.is-center .rail-card { box-shadow: 0 0 0 1px var(--sky), var(--shadow-lg); border-color: var(--sky); }
+#portfolio .more-link { margin: 22px 0 0; text-align: center; }
+
+/* teaching highlights + timeline disclosure: consistent elevation & hover */
+.th-card { transition: transform .25s var(--ease), box-shadow .25s, border-color .25s; }
+@media (hover: hover) {
+  .th-card:hover { transform: translateY(-2px); border-color: var(--sky); box-shadow: var(--shadow-md); }
+}
+.t-more { box-shadow: var(--shadow-sm); transition: border-color .2s; }
+.t-more:hover { border-color: var(--sky); }
+
+/* awards ledger + lower panels: clean header band, crisp pills, softer card shadows */
+.award-brief { padding: 0; overflow: hidden; box-shadow: var(--shadow-sm); }
+.award-brief thead th { padding: 12px 16px 10px; background: var(--surface-2); }
+.award-brief td { padding: 9px 16px; }
+.award-brief .b-when { width: 78px; }
+.b-proj {
+  border: 1px solid var(--border); background: var(--surface);
+  transition: border-color .16s, color .16s, background-color .16s;
+}
+.award-brief tbody tr:hover .b-proj { border-color: var(--sky); background: var(--sky-soft); color: var(--sky-ink); }
+.pending, .latest { box-shadow: var(--shadow-sm); }
+@media (max-width: 720px) {
+  .award-brief { padding: 4px 16px; overflow: visible; }
+  .award-brief td { padding: 0; }
+  .award-brief tbody tr { padding: 12px 0; }
+}
+
+/* press highlights + press archive: landscape thumbnails so ceremony group photos stay uncropped, interactive lift */
+.pb-feature, .pb-item {
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s var(--ease), border-color .25s, box-shadow .25s;
+}
+.pb-photo { overflow: hidden; }
+.pb-photo img, .pb-thumb img { transition: transform .45s var(--ease); }
+@media (hover: hover) {
+  .pb-feature:hover, .pb-item:hover { transform: translateY(-2px); border-color: var(--sky); box-shadow: var(--shadow-md); }
+  .pb-feature:hover .pb-photo img, .pb-item:hover .pb-thumb img { transform: scale(1.03); }
+}
+.pb-item { grid-template-columns: 124px minmax(0, 1fr); align-items: center; gap: 16px; }
+.pb-thumb { width: 124px; height: 84px; border: 1px solid var(--border); }
+.press-group { box-shadow: var(--shadow-sm); transition: border-color .2s, box-shadow .2s; }
+.pg-photo { border: 1px solid var(--border); }
+.outlet-chip { transition: transform .16s var(--ease), border-color .16s, background-color .16s; }
+@media (hover: hover) { .outlet-chip:hover { transform: translateY(-1px); } }
+@media (max-width: 480px) {
+  .pb-item { grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 12px; align-items: start; }
+  .pb-thumb { width: 92px; height: 64px; }
+}
+
+/* skills periodic table: flow-based number so index never collides with symbol, crisp 2-line wrap for long tool names */
+.pt-grid { grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); gap: 10px; }
+.el {
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 3px;
+  aspect-ratio: auto; min-height: 104px; padding: 10px 10px 11px;
+}
+.el-n { position: static; margin-bottom: auto; font-size: .72rem; line-height: 1; }
+.el-sym { font-size: 1.65rem; line-height: 1.05; margin-top: 6px; }
+.el-name {
+  font-size: .75rem; line-height: 1.25; white-space: normal;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; overflow-wrap: anywhere;
+}
+@media (max-width: 560px) {
+  .pt-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .el { min-height: 92px; padding: 9px 9px 10px; }
+  .el-sym { font-size: 1.45rem; margin-top: 4px; }
+  .el-name { font-size: .74rem; }
+}
+
+/* working style + contact: unified top accent language */
+.principle { position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
+.principle::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 3px;
+  background: linear-gradient(90deg, var(--sky), var(--sky-soft));
+}
+.principle:nth-child(even)::before { background: linear-gradient(90deg, var(--mint), var(--mint-soft)); }
+.flow-strip { box-shadow: var(--shadow-sm); }
+.contact-card { box-shadow: inset 0 1px 0 var(--pane-top), var(--shadow-md); }
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait:hover, .ask-facts li:hover, .ask-chips .chip:hover, .th-card:hover,
+  .pb-feature:hover, .pb-item:hover, .pb-feature:hover .pb-photo img,
+  .pb-item:hover .pb-thumb img, .outlet-chip:hover { transform: none; }
+}

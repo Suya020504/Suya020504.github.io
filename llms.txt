@@ -10,7 +10,7 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - 이메일: shuai020504@naver.com
 - 학력: 단국대학교 · 수학과 · 식품자원경제학과 복수전공 · 2024 – 2027.02 (졸업 예정)
 - Education: Dankook University · B.S. candidate, Mathematics and Food & Resource Economics (double major) · expected graduation: February 2027
-- 최종 업데이트: 2026-11-20
+- 최종 업데이트: 2026-11-27
 
 ## 링크
 - [GitHub](https://github.com/Suya020504)
@@ -19,6 +19,7 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - [Tistory](https://suya0504.tistory.com/)
 
 ## 프로젝트
+- [Next Market](https://suya0504.vercel.app/projects/next-market/): 계산은 코드, 근거는 공식 원문 인용 AI, 승인·보류는 담당자가 맡는 K-푸드 수출 유망국 TOP3 에이전트 (수상: 최우수상)
 - [사람은 오는데, 왜 머물지 않을까?](https://suya0504.vercel.app/projects/tourism-stay-gap/): 이동 조건을 고려한 관광 체류 격차 분석과 지역별 정책 과제 제안 (수상: 우수상 · 한국문화관광연구원장상)
 - [사각119](https://suya0504.vercel.app/projects/sagak119/): 화재 취약 거처의 방문 우선순위와 행정 문서 작성 흐름을 설계한 팀 시제품 (수상: 최우수상 · 소방청장상)
 - [너의 교수님은?](https://suya0504.vercel.app/projects/your-professor/): 공식 교수 정보로 탐색부터 첫 대화 준비까지 돕는 팀 MVP
@@ -38,34 +39,33 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - [말잇다 · VOICE MATE](https://suya0504.vercel.app/projects/malitda/): 학생이 음성인식 문장을 직접 확인·수정·승인한 뒤 공유하는 앱 (수상: 입선)
 - [NO LOGO REMIX](https://suya0504.vercel.app/projects/no-logo-remix/): 브랜드는 숨기고 기술을 발견하게 하는 참여형 전시 팝업
 - [상상해봐 · 2047년에서 온 편지](https://suya0504.vercel.app/projects/letter-2047/): 2047년의 동문이 2027년 신입생이던 자신에게 보내는 편지로, AI와 함께 배우는 대학을 그린 3분 AI 영상
+- [생산 지속 카드](https://suya0504.vercel.app/projects/production-card/): 식품 생산실적 792만 행으로 간편식 신제품의 1·2·3년 뒤 생산 확인율을 계산하고 AI로 조회하는 웹 서비스
 
-## 수상 (19건)
+## 수상 (21건)
+- 2026.11.25 최우수상 · Next Market · LOTTE AX CHALLENGE 2026 (롯데지주 · 롯데웰푸드 (OpenAI 협력))
+- 2026.11.20 장려상 · 농촌진흥청장상 · 농산물 소득조사 데이터 분석 · 2026 농산물 소득조사·농식품 소비정보 데이터 활용 아이디어 경진대회 (농산물 소득조사 부문) (농촌진흥청)
 - 2026.11.10 입선 · 말잇다 · VOICE MATE · 2026 장애인 분야 해커톤 「장애 플러스 기술」 (교육부 · 한국장애인재단) — 근거: https://www.kfpd.org/52/120
 - 2026.11.06 장려상 · 대한지역사회영양학회장상 · 간 맞춤표 · 2026 국가표준식품성분DB 활용 아이디어 공모전 (농촌진흥청 국립식량과학원 · 대한지역사회영양학회) — 근거: https://koscom.or.kr/main/sub.html?Mode=view&boardID=www26&num=1263
 - 2026.10.28 대상 · 과학기술정보통신부장관상 · 온지붕 · 제3회 미래융합인재 발굴 소프트웨어 챌린지 (일반부) (과학기술정보통신부 · 경산시 · 정보통신기획평가원 · 경산이노베이션아카데미) — 근거: https://www.etnews.com/20261029000100
 - 2026.10.30 최우수상 · 안양시장상 · 필지 블랙박스 · 2026 안양시 공공데이터·AI 활용 대학생 경진대회 (안양시) — 근거: https://anyang.go.kr/main/selectBbsNttView.do?bbsNo=62&key=259&nttNo=460365
 - 2026.10.21 우수상 · 국민체육진흥공단 이사장상 · 먼저봄 · 2026년 국민체육진흥공단 공공데이터 활용 경진대회 (서비스 부문) (국민체육진흥공단) — 근거: https://www.kspo.or.kr/kspo/bbs/B0000099/view.do?menuNo=200435&nttId=64368
-- 2026.10.13 최우수상 · 행정안전부장관상 · 선택에서 필수로 · 제21회 공중화장실 혁신아이디어 공모전 (행정안전부 · 한국화장실협회) — 근거: https://jeonju.go.kr/planweb/board/view.9is?boardUid=ff8080818990c349018b1dbaa78e4b41&contentUid=ff8080818990c349018b041a87373953&dataUid=9be517a89eb4c41201a08fa37446413d&page=4&tmpField14=
+- 2026.10.13 최우수상 · 행정안전부장관상 · 선택에서 필수로 · 제21회 공중화장실 혁신아이디어 공모전 (행정안전부 · 한국화장실협회) — 근거: http://www.toilet.or.kr/board/notice?viewMode=view&page=1&idx=1193
 - 2026.10.16 우수상 · 179 수요지도 · AI기반 지속 가능한 통일 아이디어 공모전 (고려대학교 세종캠퍼스 통일교육선도대학 사업단)
 - 2026.09.21 대상 · 서울관광재단 대표이사상 · 지금서울 · 2026 비짓서울 API 데이터·AI 활용 아이디어 공모전 (서울관광재단) — 근거: https://api.visitseoul.net/support/notice/view/7?lang=ko&pageNo=1
 - 2026.09.11 최우수상 · 소방청장상 · 사각119 · 제6회 소방안전 빅데이터 활용 및 아이디어 경진대회 (서비스개발 부문) (소방청) — 근거: https://bigdata-119.kr/bbs/view?bbsctt_id=580
 - 2026.09 최우수상 · 나란히 · 2026 서울어린이대공원 AI기반 서비스 아이디어 공모전 (서울시설공단) — 근거: https://www.childrenpark-contest.co.kr/view.asp?boardcode=notice&field=&go=&idx=16&keyword=&page=
-- 2026.09.07 심층제안 최우수상 · 축산물품질평가원장상 · 다봄 · 2026 축평원 서비스 MEET YOUR IDEA 공모전 (심층 제안 부문) (축산물품질평가원) · 수상 확정 · 시상 안내 2026.10.28 — 근거: https://www.ekape.or.kr/board/view.do?boardInfoNo=0024&boardNo=956&menuId=menu149208
+- 2026.09.07 심층제안 최우수상 · 축산물품질평가원장상 · 다봄 · 2026 축평원 서비스 MEET YOUR IDEA 공모전 (심층 제안 부문) (축산물품질평가원) — 근거: https://www.ekape.or.kr/board/view.do?boardInfoNo=0024&boardNo=956&menuId=menu149208
 - 2026.09.18 우수작 1위 · 매입임대주택 예측정비 플랫폼 · 2026년 공공데이터 활용 아이디어 공모 (대구도시개발공사) — 근거: https://www.dudc.or.kr/ko/page.do?appId=notice&board_idx=8998&cmd=2&mnu_uid=100&pageNo=1
 - 2026.09.17 우수상 · 한국문화관광연구원장상 · 사람은 오는데, 왜 머물지 않을까? · 2026 관광데이터 분석 포스터 공모전 (한국문화관광연구원) — 근거: https://know.tour.go.kr/customer/contestevent/detail19Re.do?seq=29714
 - 2026.09.30 우수상 · 한국과학기술정보연구원장상 · 같은 장면, 다른 정보 · 개방형 XR 협업 플랫폼 서비스 아이디어 도출 경진대회 (한국과학기술정보연구원(KISTI)) — 근거: https://www.kisti.re.kr/notifications/post/notice/7052
-- 2026.09.16 충북인공지능산업협회장상 · 바람의 지도 · 제13회 전국 ICT융합 공모전 (충북과학기술혁신원 · 충북인공지능산업협회) · 수상 확정 · 시상 예정 · 시상식 2026.11.25 — 근거: https://www.ictfestival.or.kr/board/view/UZf80/36307
+- 2026.09.16 충북인공지능산업협회장상 · 바람의 지도 · 제13회 전국 ICT융합 공모전 (충북과학기술혁신원 · 충북인공지능산업협회) — 근거: https://www.ictfestival.or.kr/board/view/UZf80/36307
 - 2026.09.03 장려상 · 한국임업진흥원장상 · 산촌 순환지수(FCI) · 이음숲 · 2026 임업통계 활용 경진대회 (아이디어 부문) (산림청 · 한국임업진흥원) — 근거: https://www.kofpi.or.kr/notice/notice_01view.do?bb_seq=12522
 - 2026.08.27 입선 · 달서구청장상 · 달서 미리온(ON) · 2026 달서 전국 대학생 AI활용 아이디어 콘테스트 (대구광역시 달서구) — 근거: https://www.dalseo.daegu.kr/index.do?menu_id=00002729
 - 2026.07.24 우수상 · 2위 · RAILIFT NEXT · 역사 내외 디지털 광고 사업화 및 성과 측정 아이디어 공모전 ((주)비전잇)
 - 2026.05.29 우수상 · 단국대학교 총장상 · 같은 이름, 다른 기억 · 인문학, AI를 만나 지도를 그리다 (단국대학교 HUSS 사업단) — 근거: https://webzine.dankook.ac.kr/news/articleView.html?idxno=1107
 
-## 수상 확정 · 상격 확인 중
-- 농산물 소득조사 데이터 분석: 농촌진흥청장상 확정 · 상격은 결선 후
-
 ## 심사·결과 대기
-- LOTTE AX CHALLENGE 2026: 본선 진출
-- 다봄 팀 · 식품 데이터 캡스톤: 참가팀 선정 · 과제 수행 중
+- 생산 지속 카드: 과제 제출·웹 배포 완료 · 결과 확인 중
 
 ## 발표
 - 2026.11.10 말잇다 · VOICE MATE 최종심사 · 2026 장애인 분야 해커톤 디지털 포용 분야 (공개 심사) · 역할: 팀 VOICE MATE · 중간심사 발표·기획 참여
@@ -80,10 +80,21 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - 2026.08 닿지 않는 돌봄 본선 발표 · 고양시 빅데이터 활용 아이디어 공모전 · 역할: 팀 도달 · 본선 발표
 - 2026.05.29 같은 이름, 다른 기억 최종 발표회 · 인문학, AI를 만나 지도를 그리다 · 단국대학교 HUSS 사업단 · 역할: 개인 프로젝트 · 발표
 - 2026.11.06 「간 맞춤표」 2차 발표평가 · 2026 국가표준식품성분DB 활용 아이디어 공모전
-- 2026.11.20 농산물 소득조사 데이터 분석 결선 (예정) · 2026 농산물 소득조사·농식품 소비정보 데이터 활용 아이디어 경진대회
-- 2026.11.24 11.24–25 (1박 2일) LOTTE AX CHALLENGE 2026 본선 (예정) · LOTTE AX CHALLENGE 2026
+- 2026.11.20 농산물 소득조사 데이터 분석 결선 · 2026 농산물 소득조사·농식품 소비정보 데이터 활용 아이디어 경진대회
+- 2026.11.24 11.24–25 (1박 2일) LOTTE AX CHALLENGE 2026 본선 · LOTTE AX CHALLENGE 2026 · 역할: 개인 참가 · AI 에이전트 개발·현장 시연
 
 ## 보도
+- 2026.11.26 DKU Today (단국대학교 공식 홈페이지) — [이연수 학생(수학과), 행안부·과기정통부 장관상 2관왕 쾌거](https://www.dankook.ac.kr/web/kor/dku-today?_dku_bbs_web_BbsPortlet_action=view_message&_dku_bbs_web_BbsPortlet_bbsMessageId=188826&p_p_id=dku_bbs_web_BbsPortlet&p_p_lifecycle=0&p_p_mode=view&p_p_state=normal)
+  - 2026.11.19 베리타스알파 — [팀 도달, 제21회 공중화장실 혁신 아이디어 공모전 행정안전부장관상 수상](https://www.veritas-a.com/news/articleView.html?idxno=638145)
+  - 2026.11.19 한국화장실협회 — [제17회 한국화장실문화축전 · 제21회 공중화장실 혁신 아이디어 공모전 시상](http://www.toilet.or.kr/board/notice?viewMode=view&page=1&idx=1193)
+- 2026.11.25 뉴스인오늘 — [안양시, 공공 데이터·인공 지능(AI) 대학생 경진 대회 시상…입상작 4건 선정](https://www.focus24.co.kr/177330)
+  - 2026.11.25 경기중앙신문 — [안양시, 공공 데이터·인공 지능(AI) 대학생 경진 대회 시상…입상작 4건 선정](https://www.ggjapp.com/news/articleView.html?idxno=245788)
+  - 2026.11.25 여성종합뉴스 — [안양시, 공공데이터·AI 활용 대학생 경진대회 시상…우수작 4건 선정](https://womannews.net/detail.php?number=460170&thread=22r12r01)
+  - 2026.11.25 미디어투데이 — [안양시, 공공 데이터·인공 지능(AI) 대학생 경진 대회 시상…입상작 4건 선정](https://www.mediatoday.asia/1897131)
+  - 2026.11.25 프레스나 — [안양시, 공공 데이터·인공 지능(AI) 대학생 경진 대회 시상…입상작 4건 선정](https://www.pressna.com/news/newsview.php?ncode=1381236612641897)
+  - 2026.11.25 경기헤럴드 — [안양시, 공공 데이터·인공 지능(AI) 대학생 경진 대회 시상](https://m.ggherald.com/view.php?idx=80867)
+- 2026.11.25 경기타임스 — [위반 건축물 찾아 공문 초안까지 쓰는 AI…안양시, 대학생 아이디어 4건 시상](https://www.ggtimes.co.kr/news/articleView.html?idxno=399288)
+- 2026.11.20 청주일보 — [“조례엔 답 있는데 데이터는 빈칸”…충북대·단국대 학생팀, 공중화장실 혁신 최우수상](https://www.cj-ilbo.com/news/articleView.html?idxno=1187545)
 - 2026.11.19 국제뉴스 — [팀 도달, 공중화장실 공모전 행안부 장관상 수상](https://www.gukjenews.com/news/articleView.html?idxno=3757321)
 - 2026.11.16 충북대학교 (대학 뉴스) — [온지붕, 미래융합인재 발굴 SW 챌린지 대상](https://cbnu.ac.kr/www/selectBbsNttView.do?key=548&bbsNo=14&nttNo=171650)
   - 2026.11.03 공뉴스 — [공뉴스 기사](https://www.bzeronews.com/news/articleView.html?idxno=824736)
