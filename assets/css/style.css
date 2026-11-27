@@ -1872,3 +1872,53 @@ a.hero-badge:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); 
   .pb-feature:hover, .pb-item:hover, .pb-feature:hover .pb-photo img,
   .pb-item:hover .pb-thumb img, .outlet-chip:hover { transform: none; }
 }
+
+/* ================================================================ v3.14 (2026-11-27): spacing & rhythm refinement
+   1. Hero vertical breathing & centered mobile portrait   2. Tighter #portfolio cover-flow head gap
+   3. Archive top spacing & balanced .pg-side press cards  4. Awards peaks/table breathing & lower panel symmetry
+   5. Roomier tablet/laptop page gutter                    6. Balanced footer & dot-wordmark height */
+:root {
+  --gutter: clamp(18px, 4vw, 32px);
+  --section-y: clamp(52px, 6vw, 80px);
+}
+.section-head { margin-bottom: clamp(24px, 3vw, 34px); }
+
+/* 1. hero: remove leftover min-height and mobile -4% shift from hidden v2 .panes */
+.hero { padding-block: clamp(28px, 5.5vw, 76px) clamp(44px, 6.5vw, 84px); }
+.hero-visual { min-height: 0; padding-block: 8px; }
+@media (max-width: 860px) {
+  .hero-grid { gap: 16px; }
+  .hero-visual { min-height: 0; padding-block: 4px 0; }
+  .stage { translate: none; }
+}
+@media (max-width: 480px) {
+  .hero-visual { min-height: 0; }
+}
+
+/* 2. #portfolio cover-flow: balanced top/bottom spacing around cards */
+#portfolio .section-head { margin-bottom: 14px; }
+.rail-track { padding-top: 12px; padding-bottom: 24px; }
+#portfolio .more-link { margin: 18px 0 0; }
+
+/* 3. archive header & press.html two-column density */
+.archive-page { padding-top: clamp(24px, 4vw, 48px); }
+.arch-tabs { margin-bottom: clamp(20px, 3vw, 28px); }
+.arch-panel .section-head { margin-bottom: clamp(20px, 2.5vw, 28px); }
+.pg-side { display: grid; gap: 18px; align-content: start; min-width: 0; }
+.pg-side .pg-also { padding-top: 16px; border-top: 1px dashed var(--border); }
+
+/* 4. #awards peaks, 21-row ledger breathing, symmetric lower panels */
+.award-peaks { margin: 0 0 20px; }
+.award-brief thead th { padding: 13px 18px 11px; }
+.award-brief td { padding: 11px 18px; }
+.b-proj { margin-left: 10px; }
+.pending, .latest { padding: 20px 22px 14px; }
+@media (max-width: 720px) {
+  .award-brief td { padding: 0; }
+  .b-proj { margin: 5px 0 0; }
+  .pending, .latest { padding: 18px 18px 12px; }
+}
+
+/* 6. footer: symmetric top/bottom padding and calmer dot-wordmark height */
+.site-footer { padding-block: 28px 44px; }
+.foot-mark { height: clamp(72px, 10vw, 130px); margin-top: 16px; }
