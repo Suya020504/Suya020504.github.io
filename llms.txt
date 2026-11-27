@@ -19,7 +19,7 @@ I analyze tourism, safety, and welfare data, grounded in mathematics and food & 
 - [Tistory](https://suya0504.tistory.com/)
 
 ## 프로젝트
-- [Next Market](https://suya0504.vercel.app/projects/next-market/): 계산은 코드, 근거는 공식 원문 인용 AI, 승인·보류는 담당자가 맡는 K-푸드 수출 유망국 TOP3 에이전트 (수상: 최우수상)
+- [Next Market](https://suya0504.vercel.app/projects/next-market/): 결정론적 코드 계산, 62종 모델 실측 기반 AI 근거·반증, 사내 원가 로컬 격리, 공식 실무 문서 4종 100% 검산까지 잇는 해외 진출 의사결정 에이전트 (수상: 최우수상)
 - [사람은 오는데, 왜 머물지 않을까?](https://suya0504.vercel.app/projects/tourism-stay-gap/): 이동 조건을 고려한 관광 체류 격차 분석과 지역별 정책 과제 제안 (수상: 우수상 · 한국문화관광연구원장상)
 - [사각119](https://suya0504.vercel.app/projects/sagak119/): 화재 취약 거처의 방문 우선순위와 행정 문서 작성 흐름을 설계한 팀 시제품 (수상: 최우수상 · 소방청장상)
 - [너의 교수님은?](https://suya0504.vercel.app/projects/your-professor/): 공식 교수 정보로 탐색부터 첫 대화 준비까지 돕는 팀 MVP
