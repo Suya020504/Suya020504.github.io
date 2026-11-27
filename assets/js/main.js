@@ -742,4 +742,21 @@
     window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
     show(location.hash.slice(1), false);
   })();
+
+  /* ---------------------------------------------------------------- v3.13 Vercel Web Analytics + Speed Insights
+     Loads Vercel's first-party /_vercel/* beacons on production/custom HTTPS hosts only (never on localhost or
+     github.io mirrors, keeping local previews and mirrors free of 404 console noise). */
+  (function () {
+    var host = location.hostname || '';
+    if (location.protocol !== 'https:' || !host || host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || /\.github\.io$/i.test(host)) return;
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    ['/_vercel/insights/script.js', '/_vercel/speed-insights/script.js'].forEach(function (src) {
+      if (doc.querySelector('script[src="' + src + '"]')) return;
+      var s = doc.createElement('script');
+      s.defer = true;
+      s.src = src;
+      (doc.head || doc.documentElement).appendChild(s);
+    });
+  })();
 })();
