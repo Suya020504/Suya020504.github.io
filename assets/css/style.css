@@ -1922,3 +1922,6 @@ a.hero-badge:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); 
 /* 6. footer: symmetric top/bottom padding and calmer dot-wordmark height */
 .site-footer { padding-block: 28px 44px; }
 .foot-mark { height: clamp(72px, 10vw, 130px); margin-top: 16px; }
+@media (max-width: 480px) {
+  .hero .cta-row .btn-ghost { flex: 1 1 auto; padding-inline: 14px; }
+}
